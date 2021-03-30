@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
+import 'View/Dashboard/Menu/Customer/ListCustomer.dart';
 import 'View/Login/LoginScreen.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.idScreen: (context) => LoginScreen(),
         // Dashboard.idScreen: (context) => Dashboard(),
         '/VisitPlan': (BuildContext context) => new VisitPlanMenu(),
+        '/ListCustomer': (BuildContext context) => new ListCustomer(),
       },
     );
   }

@@ -20,6 +20,7 @@ class MenuDashboard extends StatelessWidget {
             MyMenu(
               title: "Customer",
               icon: Icons.supervised_user_circle,
+              destination: '/ListCustomer',
             ),
             MyMenu(
               title: "Spec & Price",
