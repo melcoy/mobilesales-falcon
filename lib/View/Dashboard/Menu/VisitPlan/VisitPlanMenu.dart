@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:salesappmobile/Util/CameraPageState.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanAdd/VisitPlanAdd.dart';
@@ -18,6 +21,7 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -149,11 +153,99 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pop(context);
+                          // (imageFile!= null)? showDialog(
+                          //     context: context,
+                          //     builder: (context) => DialogCheckIn()) : SizedBox();
+                          showDialog(
+                              context: context,
+                              builder: (context) => DialogCheckIn());
                         },
                       )),
                 );
               },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DialogCheckIn extends StatefulWidget {
+  @override
+  _DialogCheckInState createState() => _DialogCheckInState();
+}
+
+class _DialogCheckInState extends State<DialogCheckIn> {
+  File imageFile;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(top: 10, bottom: 16, left: 16, right: 16),
+            margin: EdgeInsets.only(top: 16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(17),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 10.0))
+                ]),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Check In",
+                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                Text(
+                  "Sebelum melakukan Check - In pastikan anda telah bertemu dengan Prospek",
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                RaisedButton(
+                  elevation: 0.0,
+                  padding: EdgeInsets.all(12.0),
+                  shape: StadiumBorder(),
+                  child: Text(
+                    "Check In",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  color: colorRedFigma,
+                  onPressed: () async {
+                    imageFile = await Navigator.push<File>(context,
+                        MaterialPageRoute(builder: (_) => CameraPageState()));
+                    setState(() {});
+                  },
+                ),
+                TextButton(
+                  child: Text(
+                    "Cancel",
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: colorRedFigma, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ),
           ),
         ],

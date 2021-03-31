@@ -4,7 +4,6 @@ import 'package:salesappmobile/Util/Util.dart';
 class HeaderDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         Container(
