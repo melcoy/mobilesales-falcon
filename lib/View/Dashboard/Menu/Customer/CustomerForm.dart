@@ -20,7 +20,9 @@ class _CustomerFormState extends State<CustomerForm> {
   String kecamatanChoose;
   String kelurahanChoose;
   String kodeposChoose;
+
   List provinsi = ["provinsi 1", "provinsi 2", "provinsi 3", "provinsi 4", "provinsi 5", "provinsi 6", "provinsi 7", "provinsi 8", "provinsi 9", "provinsi 10", "provinsi 11", "provinsi 12", "provinsi 13", "provinsi 14"];
+
   List kota = ["kota 1", "kota 2", "kota 3", "kota 4"];
   List kecamatan = ["kecamatan 1", "kecamatan 2", "kecamatan 3", "kecamatan 4"];
   List kelurahan = ["kelurahan 1", "kelurahan 2", "kelurahan 3", "kelurahan 4"];
@@ -45,7 +47,6 @@ class _CustomerFormState extends State<CustomerForm> {
           },
         ),
         title: Container(
-          margin: EdgeInsets.fromLTRB(70, 0, 0, 0),
           child: Text(
             "New Customer",
             style: Theme.of(context)
@@ -432,7 +433,7 @@ class _CustomerFormState extends State<CustomerForm> {
                         // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Login Data')));
-                        Navigator.pushReplacement(context,
+                        Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return Dashboard();
                         }));

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/VisitPlanCheckIn.dart';
 
 import 'Util.dart';
 
@@ -69,7 +70,10 @@ class _CameraPageStateState extends State<CameraPageState> {
                                   size: 75,
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return VisitPlanCheckIn();
+                                  }));
                                 },
                               ),
                             )
