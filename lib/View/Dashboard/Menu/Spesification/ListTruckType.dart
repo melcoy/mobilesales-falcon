@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:salesappmobile/Util/Util.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerDetail.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerForm.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Spesification/TruckDetail.dart';
 
-class ListCustomer extends StatelessWidget {
+class ListTruckType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,53 +21,29 @@ class ListCustomer extends StatelessWidget {
           },
         ),
         title: Text(
-          "Customer List ",
+          "Izuzu D Max",
           style: Theme.of(context)
               .textTheme
               .headline6
-              .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+              .copyWith(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
         ),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.note_add,
-                color: colorRedFigma,
-                size: 35,
-              ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CustomerForm();
-                }));
-              })
-        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-              height: 30,
-              margin: EdgeInsets.only(top: 10),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  "Search: ",
-                  style: Theme.of(context).textTheme.headline6.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-              )),
           Row(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                margin: EdgeInsets.fromLTRB(20, 10, 10, 10),
                 height: 40,
                 width: size.width * 0.80,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: TextField(
                     maxLines: 1,
                     decoration: InputDecoration(
@@ -80,7 +54,7 @@ class ListCustomer extends StatelessWidget {
                           color: Colors.grey,
                           fontSize: 15.0,
                         )),
-                    style: TextStyle(fontSize: 14.0),
+                    style: TextStyle(fontSize: 20.0),
                   ),
                 ),
               ),
@@ -92,9 +66,8 @@ class ListCustomer extends StatelessWidget {
                         size: 40,
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return CustomerForm();
+                        Navigator.push(context,MaterialPageRoute(builder: (context) {
+                          return ListTruckType();
                         }));
                       }))
             ],
@@ -106,7 +79,7 @@ class ListCustomer extends StatelessWidget {
               itemBuilder: (_, index) {
                 return Container(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  height: 150,
+                  height: 80,
                   width: double.maxFinite,
                   child: Card(
                       elevation: 5,
@@ -115,7 +88,7 @@ class ListCustomer extends StatelessWidget {
                           height: 30,
                           margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                           child: Text(
-                            "Budi",
+                            "Izuzu D Max Bensin 10Lt",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
@@ -123,20 +96,6 @@ class ListCustomer extends StatelessWidget {
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        leading: Container(
-                            margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                            child: Icon(
-                              Icons.circle,
-                              color: colorRedFigma,
-                            )),
-                        subtitle: Text(
-                          " Jln Soekarno Hatta 999 RT001 RW007 Kec BojongLoa Kaler kelurahan Bojong",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
                         ),
                         trailing: Container(
                           height: 30,
@@ -148,7 +107,7 @@ class ListCustomer extends StatelessWidget {
                         ),
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return CustomerDetail();
+                            return TruckDetail();
                           }));
                         },
                       )),

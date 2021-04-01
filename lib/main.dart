@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruck.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
 import 'View/Dashboard/Menu/Customer/ListCustomer.dart';
 import 'View/Login/LoginScreen.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         // Dashboard.idScreen: (context) => Dashboard(),
         '/VisitPlan': (BuildContext context) => new VisitPlanMenu(),
         '/ListCustomer': (BuildContext context) => new ListCustomer(),
+        '/ListTruck': (BuildContext context) => new ListTruck(),
       },
     );
   }

@@ -25,6 +25,7 @@ class MenuDashboard extends StatelessWidget {
             MyMenu(
               title: "Spec & Price",
               icon: Icons.local_shipping,
+              destination: '/ListTruck',
             ),
           ],
         ),
