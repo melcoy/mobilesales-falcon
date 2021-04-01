@@ -230,9 +230,11 @@ class _DialogCheckInState extends State<DialogCheckIn> {
                   ),
                   color: colorRedFigma,
                   onPressed: () async {
-                    imageFile = await Navigator.push<File>(context,
+                    // imageFile = await Navigator.push<File>(context,
+                    //     MaterialPageRoute(builder: (_) => CameraPageState()));
+                    // setState(() {});
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (_) => CameraPageState()));
-                    setState(() {});
                   },
                 ),
                 TextButton(
