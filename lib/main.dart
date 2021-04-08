@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:salesappmobile/Bloc/Login/bloc/loginbloc_bloc.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruck.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
+import 'Bloc/Menu/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 import 'View/Dashboard/Menu/Customer/ListCustomer.dart';
 import 'View/Login/LoginScreen.dart';
 
@@ -16,11 +21,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: Colors.white),
       initialRoute: LoginScreen.idScreen,
       routes: {
-        LoginScreen.idScreen: (context) => LoginScreen(),
+        LoginScreen.idScreen: (context) => BlocProvider<LoginblocBloc>(
+            create: (BuildContext context) => LoginblocBloc(),
+            child: LoginScreen()),
         // Dashboard.idScreen: (context) => Dashboard(),
         '/VisitPlan': (BuildContext context) => new VisitPlanMenu(),
-        '/ListCustomer': (BuildContext context) => new ListCustomer(),
+
+        '/ListCustomer': (context) => BlocProvider<ListcustomerblocBloc>(
+              create: (BuildContext context) => ListcustomerblocBloc(),
+              child: ListCustomer(),
+            ),
         '/ListTruck': (BuildContext context) => new ListTruck(),
+        '/ReportSales': (BuildContext context) => new ReportSales(),
       },
     );
   }

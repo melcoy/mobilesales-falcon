@@ -3,7 +3,6 @@ import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Dashboard.dart';
 
 import '../../../../Util/Util.dart';
-import '../../../../Util/Util.dart';
 
 class CustomerForm extends StatefulWidget {
   @override
@@ -20,8 +19,24 @@ class _CustomerFormState extends State<CustomerForm> {
   String kecamatanChoose;
   String kelurahanChoose;
   String kodeposChoose;
+  String selectedProvince;
 
-  List provinsi = ["provinsi 1", "provinsi 2", "provinsi 3", "provinsi 4", "provinsi 5", "provinsi 6", "provinsi 7", "provinsi 8", "provinsi 9", "provinsi 10", "provinsi 11", "provinsi 12", "provinsi 13", "provinsi 14"];
+  List provinsi = [
+    "provinsi 1",
+    "provinsi 2",
+    "provinsi 3",
+    "provinsi 4",
+    "provinsi 5",
+    "provinsi 6",
+    "provinsi 7",
+    "provinsi 8",
+    "provinsi 9",
+    "provinsi 10",
+    "provinsi 11",
+    "provinsi 12",
+    "provinsi 13",
+    "provinsi 14"
+  ];
 
   List kota = ["kota 1", "kota 2", "kota 3", "kota 4"];
   List kecamatan = ["kecamatan 1", "kecamatan 2", "kecamatan 3", "kecamatan 4"];
@@ -220,22 +235,22 @@ class _CustomerFormState extends State<CustomerForm> {
                       decoration: BoxDecoration(
                           border: Border.all(width: 1),
                           borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton(
-                        hint: Text('Provinsi'),
-                        dropdownColor: Colors.white,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 36,
-                        isExpanded: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
+                      child: DropdownButtonFormField<dynamic>(
+                        value: selectedProvince,
+                        hint: Text(
+                          'Salutation',
                         ),
-                        value: provinsiChoose,
-                        onChanged: (newValue) {
-                          setState(() {
-                            provinsiChoose = newValue;
-                          });
-                        },
+                        onChanged: (province) =>
+                            setState(() => selectedProvince = province),
+                        validator: (value) =>
+                            value == null ? 'field required' : null,
+                        // items: ['MR.', 'MS.']
+                        //     .map<DropdownMenuItem<String>>((String value) {
+                        //   return DropdownMenuItem<String>(
+                        //     value: value,
+                        //     child: Text(value),
+                        //   );
+                        // }).toList(),
                         items: provinsi.map((valueItem) {
                           return DropdownMenuItem(
                               value: valueItem, child: Text(valueItem));
@@ -257,32 +272,31 @@ class _CustomerFormState extends State<CustomerForm> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      padding: const EdgeInsets.only(left: 16),
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 1),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton(
-                        hint: Text('Kota'),
-                        dropdownColor: Colors.white,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 36,
-                        isExpanded: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                        ),
-                        value: kotaChoose,
-                        onChanged: (newValue) {
-                          setState(() {
-                            kotaChoose = newValue;
-                          });
-                        },
-                        items: kota.map((valueItem) {
-                          return DropdownMenuItem(
-                              value: valueItem, child: Text(valueItem));
-                        }).toList(),
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(left: 16),
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: DropdownButtonFormField<dynamic>(
+                          value: selectedProvince,
+                          hint: Text(
+                            'Kota',
+                          ),
+                          onChanged: (province) =>
+                              setState(() => selectedProvince = province),
+                          validator: (value) =>
+                              value == null ? 'field required' : null,
+                          // items: ['MR.', 'MS.']
+                          //     .map<DropdownMenuItem<String>>((String value) {
+                          //   return DropdownMenuItem<String>(
+                          //     value: value,
+                          //     child: Text(value),
+                          //   );
+                          // }).toList(),
+                          items: kota.map((valueItem) {
+                            return DropdownMenuItem(
+                                value: valueItem, child: Text(valueItem));
+                          }).toList(),
+                        )),
                   ),
                   Container(
                     height: 30,
@@ -296,35 +310,34 @@ class _CustomerFormState extends State<CustomerForm> {
                         )),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 16),
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 1),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton(
-                        hint: Text('Kecamatan'),
-                        dropdownColor: Colors.white,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 36,
-                        isExpanded: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 16),
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: DropdownButtonFormField<dynamic>(
+                          value: selectedProvince,
+                          hint: Text(
+                            'Kecamatan',
+                          ),
+                          onChanged: (province) =>
+                              setState(() => selectedProvince = province),
+                          validator: (value) =>
+                              value == null ? 'field required' : null,
+                          // items: ['MR.', 'MS.']
+                          //     .map<DropdownMenuItem<String>>((String value) {
+                          //   return DropdownMenuItem<String>(
+                          //     value: value,
+                          //     child: Text(value),
+                          //   );
+                          // }).toList(),
+                          items: kecamatan.map((valueItem) {
+                            return DropdownMenuItem(
+                                value: valueItem, child: Text(valueItem));
+                          }).toList(),
                         ),
-                        value: kecamatanChoose,
-                        onChanged: (newValue) {
-                          setState(() {
-                            kecamatanChoose = newValue;
-                          });
-                        },
-                        items: kecamatan.map((valueItem) {
-                          return DropdownMenuItem(
-                              value: valueItem, child: Text(valueItem));
-                        }).toList(),
-                      ),
-                    ),
-                  ),
+                      )),
                   Container(
                     height: 30,
                     margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -343,22 +356,22 @@ class _CustomerFormState extends State<CustomerForm> {
                       decoration: BoxDecoration(
                           border: Border.all(width: 1),
                           borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton(
-                        hint: Text('Kelurahan'),
-                        dropdownColor: Colors.white,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 36,
-                        isExpanded: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
+                      child: DropdownButtonFormField<dynamic>(
+                        value: selectedProvince,
+                        hint: Text(
+                          'Kelurahan',
                         ),
-                        value: kelurahanChoose,
-                        onChanged: (newValue) {
-                          setState(() {
-                            kelurahanChoose = newValue;
-                          });
-                        },
+                        onChanged: (province) =>
+                            setState(() => selectedProvince = province),
+                        validator: (value) =>
+                            value == null ? 'field required' : null,
+                        // items: ['MR.', 'MS.']
+                        //     .map<DropdownMenuItem<String>>((String value) {
+                        //   return DropdownMenuItem<String>(
+                        //     value: value,
+                        //     child: Text(value),
+                        //   );
+                        // }).toList(),
                         items: kelurahan.map((valueItem) {
                           return DropdownMenuItem(
                               value: valueItem, child: Text(valueItem));

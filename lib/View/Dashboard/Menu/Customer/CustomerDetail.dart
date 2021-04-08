@@ -21,242 +21,233 @@ class CustomerDetail extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
-        child: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (_, index) {
-              return Column(
-                children: [
-                  Stack(
-                    children: <Widget>[
-                      Container(
-                        height: 150,
-                        width: size.width,
-                        color: colorRedFigma,
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 90, 0, 0),
-                        height: 200,
-                        child: Column(
-                          children: [
-                            Container(
-                              // color: Colors.black,
-                              child: Center(
-                                child: CircleAvatar(
-                                  radius: 70,
-                                  backgroundImage:
-                                      AssetImage("Images/bulma.png"),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                              child: Text(
-                                'Victoria NoSecret',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    // height: 150,
-                    // color: Colors.lime,
-                    child: Text(
-                      'Decision Maker : xxxxxx',
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                          color: Colors.black38,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24),
-                    ),
-                  ),
-                  ListTile(
-                    title: Container(
-                      margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Address',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+      body: Column(
+        children: [
+          Stack(
+            children: <Widget>[
+              Container(
+                height: 100,
+                width: size.width,
+                color: colorRedFigma,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                height: 200,
+                child: Column(
+                  children: [
+                    Container(
+                      // color: Colors.black,
+                      child: Center(
+                        child: CircleAvatar(
+                          radius: 70,
+                          backgroundImage: AssetImage("Images/bulma.png"),
                         ),
                       ),
                     ),
-                    subtitle: Text(
-                          "xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx ",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
-                  ),
-                  ListTile(
-                    title: Container(
+                    Container(
+                      height: 40,
                       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Tipe',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                      child: Text(
+                        'Victoria NoSecret',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30),
                       ),
                     ),
-                    subtitle: Text(
-                          "Tunai ",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
-                  ),
-                  ListTile(
-                    title: Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Provinsi',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Container(
+            // height: 150,
+            // color: Colors.lime,
+            child: Text(
+              'Decision Maker : xxxxxx',
+              style: Theme.of(context).textTheme.headline6.copyWith(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+          ),
+          Flexible(
+            child: Container(
+                child: ListView(
+              padding: const EdgeInsets.all(8),
+              children: <Widget>[
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Address',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
-                    subtitle: Text(
-                          "xxxxxxxxxxxxxxxxxxxxx ",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
                   ),
-                  ListTile(
-                    title: Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Kecamatan',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                  subtitle: Text(
+                    "xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx ",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Tipe',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
-                    subtitle: Text(
-                          "xxxxxxxxxxxxxxxxxxxxx",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
                   ),
-                  ListTile(
-                    title: Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Kelurahan',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                  subtitle: Text(
+                    "Tunai ",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Provinsi',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
-                    subtitle: Text(
-                          "xxxxxxxxxxxxxxxxxxxxx",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
                   ),
-                  ListTile(
-                    title: Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Kota',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                  subtitle: Text(
+                    "xxxxxxxxxxxxxxxxxxxxx ",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Kecamatan',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
-                    subtitle: Text(
-                          "xxxxxxxxxxxxxxxxxxxxx ",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
                   ),
-                  ListTile(
-                    title: Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      height: 30,
-                      width: size.width,
-                      child: Title(
-                        color: Colors.black,
-                        child: Text(
-                          'Kode Pos',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                  subtitle: Text(
+                    "xxxxxxxxxxxxxxxxxxxxx",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Kelurahan',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
-                    subtitle: Text(
-                          "xxxxxxxxxxxxxxxxxxxxx ",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
                   ),
-                ],
-              );
-            }),
+                  subtitle: Text(
+                    "xxxxxxxxxxxxxxxxxxxxx",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Kota',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  subtitle: Text(
+                    "xxxxxxxxxxxxxxxxxxxxx ",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ListTile(
+                  title: Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    height: 30,
+                    width: size.width,
+                    child: Title(
+                      color: Colors.black,
+                      child: Text(
+                        'Kode Pos',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  subtitle: Text(
+                    "xxxxxxxxxxxxxxxxxxxxx ",
+                    maxLines: 3,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black38, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            )),
+          )
+        ],
       ),
     );
   }

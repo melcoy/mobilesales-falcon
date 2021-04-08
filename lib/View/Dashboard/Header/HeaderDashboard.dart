@@ -7,11 +7,11 @@ class HeaderDashboard extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          height: 300,
+          height: 195,
           child: Stack(
             children: <Widget>[
               Container(
-                height: 250,
+                height: 110,
                 decoration: BoxDecoration(
                     color: colorRedFigma,
                     borderRadius: BorderRadius.only(
