@@ -32,7 +32,11 @@ class MenuDashboard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            MyMenu(title: "Report Sales", icon: Icons.assignment_ind),
+            MyMenu(
+              title: "Report Sales",
+              icon: Icons.assignment_ind,
+              destination: '/ReportSales',
+            ),
             MyMenu(title: "Promo & Disc", icon: Icons.contact_support_rounded),
             MyMenu(title: "About", icon: Icons.miscellaneous_services_rounded),
           ],

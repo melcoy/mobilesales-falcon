@@ -137,7 +137,7 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                           ),
                         ),
                         subtitle: Text(
-                          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa a a a a a  a a aa a a a a a a a a a a a a 111112121212 333333 555555",
+                          " Jln Soekarno Hatta 999 RT001 RW007 Kec BojongLoa Kaler kelurahan Bojong",
                           maxLines: 3,
                           softWrap: true,
                           style: Theme.of(context).textTheme.bodyText1.copyWith(
