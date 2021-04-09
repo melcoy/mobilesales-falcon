@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:salesappmobile/Bloc/Login/bloc/loginbloc_bloc.dart';
-import 'package:salesappmobile/Bloc/Menu/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerForm.dart';
+
+
+import 'package:salesappmobile/Bloc/Spesification/bloc/listspesificationbloc_bloc.dart';
+
 import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruck.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
@@ -31,7 +33,10 @@ class MyApp extends StatelessWidget {
               create: (BuildContext context) => ListcustomerblocBloc(),
               child: ListCustomer(),
             ),
-        '/ListTruck': (BuildContext context) => new ListTruck(),
+        '/ListTruck': (context) => BlocProvider<ListspesificationblocBloc>(
+              create: (BuildContext context) => ListspesificationblocBloc(),
+              child: ListTruck(),
+            ),
         '/ReportSales': (BuildContext context) => new ReportSales(),
       },
     );
