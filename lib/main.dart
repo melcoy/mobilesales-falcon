@@ -5,6 +5,7 @@ import 'package:salesappmobile/Bloc/Login/bloc/loginbloc_bloc.dart';
 import 'package:salesappmobile/Bloc/Spesification/bloc/listspesificationbloc_bloc.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruck.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruckType.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
 import 'Bloc/Menu/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 import 'View/Dashboard/Menu/Customer/ListCustomer.dart';

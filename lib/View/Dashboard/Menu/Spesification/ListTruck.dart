@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/Spesification/ListTruckType/bloc/listtrucktypebloc_bloc.dart';
 import 'package:salesappmobile/Bloc/Spesification/bloc/listspesificationbloc_bloc.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckModel.dart';
 import 'package:salesappmobile/Util/Util.dart';
@@ -134,9 +135,10 @@ class _ListTruckState extends State<ListTruck> {
                               ),
                               onTap: () {
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return ListTruckType();
-                                }));
+                                    MaterialPageRoute(builder: (context) => BlocProvider<ListtrucktypeblocBloc> (
+                                      create: (BuildContext context) => ListtrucktypeblocBloc(),
+                                      child: ListTruckType(id: _listTruckModel[index].id,),
+                                    )));
                               },
                             )),
                       );
