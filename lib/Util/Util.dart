@@ -9,6 +9,7 @@ const colorRedFigmapastel = const Color(0xffFD9898);
 const ipHost = "http://34.101.233.146:8069";
 const host = "34.101.233.146:8069";
 const apikey = "K22H6GAFS47WN5YCGOTD";
+const noInternet = "No Internet Connection";
 
 void saveDataUser(String session, String id, String pusat, String cabang,
     String subcabang) async {

@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:salesappmobile/Bloc/Menu/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
+
 import 'package:salesappmobile/Bloc/Menu/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
-import 'package:salesappmobile/Model/Dashboard/Menu/Customer/ListCustomerModel.dart';
+import 'package:salesappmobile/Model/Customer/ListCustomerModel.dart';
+
+
+
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerDetail.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerForm.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
+
+import 'CustomerForm.dart';
 
 class ListCustomer extends StatefulWidget {
   @override
@@ -55,9 +63,13 @@ class _ListCustomerState extends State<ListCustomer> {
                 size: 35,
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CustomerForm();
-                }));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BlocProvider<CustomeraddblocBloc>(
+                            create: (BuildContext context) =>
+                                CustomeraddblocBloc(),
+                            child: CustomerForm())));
               })
         ],
       ),
@@ -123,7 +135,6 @@ class _ListCustomerState extends State<ListCustomer> {
           ),
           BlocBuilder<ListcustomerblocBloc, ListcustomerblocState>(
             builder: (context, state) {
-              print(state);
               if (state is ListcustomerblocLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -182,10 +193,41 @@ class _ListCustomerState extends State<ListCustomer> {
                                 ),
                               ),
                               onTap: () {
+                                print(_listCustomerModel[index].dm);
+
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return CustomerDetail();
+                                  return CustomerDetail(
+                                    name: _listCustomerModel[index].name,
+                                    address: _listCustomerModel[index].alamat,
+                                    decision: _listCustomerModel[index].dm,
+                                    kecamatan:
+                                        _listCustomerModel[index].kecamatan,
+                                    kelurahan:
+                                        _listCustomerModel[index].kelurahan,
+                                    kodepos: _listCustomerModel[index].kodepos,
+                                    kota: _listCustomerModel[index].kota,
+                                    provinsi:
+                                        _listCustomerModel[index].provinsi,
+                                  );
                                 }));
+
+                                // Navigator.push(context,
+                                //     MaterialPageRoute(builder: (context) {
+                                //   return CustomerDetail(
+                                //     name: _listCustomerModel[index].name,
+                                //     address: _listCustomerModel[index].alamat,
+                                //     decision: _listCustomerModel[index].dm,
+                                //     kecamatan:
+                                //         _listCustomerModel[index].kecamatan,
+                                //     kelurahan:
+                                //         _listCustomerModel[index].kelurahan,
+                                //     kodepos: _listCustomerModel[index].kodepos,
+                                //     kota: _listCustomerModel[index].kota,
+                                //     provinsi:
+                                //         _listCustomerModel[index].provinsi,
+                                //   );
+                                // }));
                               },
                             )),
                       );

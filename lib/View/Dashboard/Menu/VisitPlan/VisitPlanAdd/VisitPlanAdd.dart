@@ -24,6 +24,8 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
 
   @override
   Widget build(BuildContext context) {
+
+
     String valueChoose;
     List customer = ["1", "2"];
     Size size = MediaQuery.of(context).size;
@@ -49,6 +51,8 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
         ),
       ),
       body: ListView(
+
+
         children: [
           Form(
             key: _formKey,

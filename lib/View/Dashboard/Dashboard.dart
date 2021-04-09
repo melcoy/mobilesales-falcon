@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salesappmobile/ApiServices/Customer/customer_repo.dart';
+import 'package:salesappmobile/ApiServices/Master/master_repo.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Header/HeaderDashboard.dart';
@@ -7,7 +7,9 @@ import 'package:salesappmobile/View/Dashboard/Menu/MenuDashboard.dart';
 
 class Dashboard extends StatelessWidget {
   static const idScreen = "dashboard";
-  final CustomerRepo _apiCustomerRepo = CustomerRepo();
+  final MasterRepo _masterRepo = MasterRepo();
+  //final CustomerRepo _customerRepo = CustomerRepo();
+  List<dynamic> kotaList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +26,10 @@ class Dashboard extends StatelessWidget {
             ),
             onPressed: () async {
               // bool login = await _apiCustomerRepo.fetchListCustomer();
+              kotaList = await _masterRepo.fetchListKota();
+              print(kotaList);
+              //bool cust = await _customerRepo.fetchAddCustomer();
+              //print("Cus" + cust.toString());
             },
           ),
         ],
