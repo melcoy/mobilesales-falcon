@@ -12,9 +12,11 @@ class VisitPlanMenu extends StatefulWidget {
 }
 
 class _VisitPlanMenuState extends State<VisitPlanMenu> {
+  DateTime pickedDate;
   @override
   void initState() {
     super.initState();
+    pickedDate = DateTime.now();
   }
 
   @override
@@ -111,8 +113,15 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                       }))
             ],
           ),
+          ListTile(
+            title: Text(
+                "Date : ${pickedDate.year}-${pickedDate.month}-${pickedDate.day}"),
+            trailing: Icon(Icons.keyboard_arrow_down),
+            onTap: _pickDate,
+            // onTap: _pickTime,
+          ),
           Container(
-            height: size.height - 210,
+            height: size.height - 220,
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (_, index) {
@@ -168,6 +177,18 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
         ],
       ),
     );
+  }
+  _pickDate() async {
+    DateTime date = await showDatePicker(
+        context: context,
+        initialDate: pickedDate,
+        firstDate: DateTime(DateTime.now().year - 5),
+        lastDate: DateTime(DateTime.now().year + 5));
+
+    if (date != null)
+      setState(() {
+        pickedDate = date;
+      });
   }
 }
 

@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/Spesification/bloc/listspesificationbloc_bloc.dart';
+import 'package:salesappmobile/Model/spesification/ListTruckModel.dart';
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruckType.dart';
 
-class ListTruck extends StatelessWidget {
+class ListTruck extends StatefulWidget {
+  @override
+  _ListTruckState createState() => _ListTruckState();
+}
+
+class _ListTruckState extends State<ListTruck> {
+  List<ListTruckModel> _listTruckModel = [];
+
+  TextEditingController editingController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+
+    BlocProvider.of<ListspesificationblocBloc>(context)
+        .add(ListspesificationblocEventStarted());
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,10 +41,8 @@ class ListTruck extends StatelessWidget {
         ),
         title: Text(
           "Product List",
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              .copyWith(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
+          style: Theme.of(context).textTheme.headline6.copyWith(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
         ),
       ),
       body: Column(
@@ -66,55 +83,73 @@ class ListTruck extends StatelessWidget {
                         size: 40,
                       ),
                       onPressed: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
                           return ListTruck();
                         }));
                       }))
             ],
           ),
-          Container(
-            height: size.height - 210,
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (_, index) {
-                return Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  height: 80,
-                  width: double.maxFinite,
-                  child: Card(
-                      elevation: 5,
-                      child: ListTile(
-                        title: Container(
-                          height: 30,
-                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          child: Text(
-                            "Izuzu D Max",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        trailing: Container(
-                          height: 30,
-                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: colorRedFigma,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return ListTruckType();
-                          }));
-                        },
-                      )),
+          BlocBuilder<ListspesificationblocBloc, ListspesificationblocState>(
+            builder: (context, state) {
+              print(state);
+              if (state is ListspesificationblocLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
-            ),
-          ),
+              } else if (state is ListspesificationblocLoaded) {
+                _listTruckModel = state.listspesificationModel;
+                return Container(
+                  height: size.height - 250,
+                  child: ListView.builder(
+                    itemCount: _listTruckModel.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        height: 80,
+                        width: double.maxFinite,
+                        child: Card(
+                            elevation: 5,
+                            child: ListTile(
+                              title: Container(
+                                height: 30,
+                                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                child: Text(
+                                  _listTruckModel[index].name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              trailing: Container(
+                                height: 30,
+                                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                child: Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: colorRedFigma,
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return ListTruckType();
+                                }));
+                              },
+                            )),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }
+          )
         ],
       ),
     );
