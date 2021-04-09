@@ -26,6 +26,7 @@ dependencies:
   auto_size_text: ^2.1.0
   build_runner: ^1.7.2
   camera: ^0.5.8+11
+  connectivity: ^3.0.3
   cupertino_icons: ^1.0.0
   dio: ^3.0.8
   flutter_bloc: ^7.0.0

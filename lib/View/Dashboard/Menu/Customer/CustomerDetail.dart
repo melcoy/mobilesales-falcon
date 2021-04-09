@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:salesappmobile/Util/Util.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Customer/ListCustomer.dart';
 
 class CustomerDetail extends StatelessWidget {
+  String name, decision, address, provinsi, kecamatan, kelurahan, kota, kodepos;
+
+  CustomerDetail(
+      {this.name,
+      this.decision,
+      this.address,
+      this.provinsi,
+      this.kecamatan,
+      this.kelurahan,
+      this.kota,
+      this.kodepos});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -48,7 +61,7 @@ class CustomerDetail extends StatelessWidget {
                       height: 40,
                       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: Text(
-                        'Victoria NoSecret',
+                        name,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -64,7 +77,7 @@ class CustomerDetail extends StatelessWidget {
             // height: 150,
             // color: Colors.lime,
             child: Text(
-              'Decision Maker : xxxxxx',
+              "Decison Maker: " + decision,
               style: Theme.of(context).textTheme.headline6.copyWith(
                   color: Colors.black38,
                   fontWeight: FontWeight.bold,
@@ -93,7 +106,7 @@ class CustomerDetail extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxx ",
+                    address,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -141,7 +154,7 @@ class CustomerDetail extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "xxxxxxxxxxxxxxxxxxxxx ",
+                    provinsi,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -165,7 +178,7 @@ class CustomerDetail extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "xxxxxxxxxxxxxxxxxxxxx",
+                    kecamatan,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -189,7 +202,7 @@ class CustomerDetail extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "xxxxxxxxxxxxxxxxxxxxx",
+                    kelurahan,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -213,7 +226,7 @@ class CustomerDetail extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "xxxxxxxxxxxxxxxxxxxxx ",
+                    kota,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -237,7 +250,7 @@ class CustomerDetail extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "xxxxxxxxxxxxxxxxxxxxx ",
+                    kodepos,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(

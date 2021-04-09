@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:salesappmobile/Bloc/Login/bloc/loginbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/Menu/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerForm.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruck.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
@@ -24,9 +26,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.idScreen: (context) => BlocProvider<LoginblocBloc>(
             create: (BuildContext context) => LoginblocBloc(),
             child: LoginScreen()),
-        // Dashboard.idScreen: (context) => Dashboard(),
         '/VisitPlan': (BuildContext context) => new VisitPlanMenu(),
-
         '/ListCustomer': (context) => BlocProvider<ListcustomerblocBloc>(
               create: (BuildContext context) => ListcustomerblocBloc(),
               child: ListCustomer(),

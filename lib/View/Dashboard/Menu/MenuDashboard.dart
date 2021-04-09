@@ -4,7 +4,7 @@ import 'package:salesappmobile/Util/Util.dart';
 class MenuDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Container(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
