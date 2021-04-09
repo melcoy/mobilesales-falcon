@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:salesappmobile/Bloc/Menu/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 import 'package:salesappmobile/Model/Dashboard/Menu/Customer/ListCustomerModel.dart';
-
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerDetail.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerForm.dart';
