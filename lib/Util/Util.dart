@@ -32,6 +32,11 @@ Future<String> getSession() async {
   return pref.getString("session") ?? "Session Expired";
 }
 
+Future<String> getIdPusat() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  return pref.getString("pusat") ?? "ID Pusat null";
+}
+
 Future<String> getIdUser() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   return pref.getString("id") ?? "ID null";
