@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/VisitPlan/ListVisitPlan/bloc/listvisitplanbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanAdd/bloc/visitplanaddbloc_bloc.dart';
+import 'package:salesappmobile/Model/Customer/ListCustomerModel.dart';
 import 'package:salesappmobile/Util/CameraPageState.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
@@ -12,11 +16,17 @@ class VisitPlanMenu extends StatefulWidget {
 }
 
 class _VisitPlanMenuState extends State<VisitPlanMenu> {
-  DateTime pickedDate;
+  DateTime _pickedDateStart;
+  DateTime _pickedDateEnd;
+  TextEditingController searchController = new TextEditingController();
   @override
   void initState() {
     super.initState();
-    pickedDate = DateTime.now();
+    _pickedDateStart = DateTime.now();
+    _pickedDateEnd = DateTime.now();
+
+    BlocProvider.of<ListvisitplanblocBloc>(context)
+        .add(ListvisitplanblocEventStarted());
   }
 
   @override
@@ -51,154 +61,256 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                 size: 35,
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return VisitPlanAdd();
-                }));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            BlocProvider<VisitplanaddblocBloc>(
+                                create: (BuildContext context) =>
+                                    VisitplanaddblocBloc(),
+                                child: VisitPlanAdd())));
               })
         ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-              height: 30,
-              margin: EdgeInsets.only(top: 10),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  "Search: ",
-                  style: Theme.of(context).textTheme.headline6.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-              )),
+          // Container(
+          //     height: 30,
+          //     margin: EdgeInsets.only(top: 10),
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(left: 10),
+          //       child: Text(
+          //         "Search: ",
+          //         style: Theme.of(context).textTheme.headline6.copyWith(
+          //             color: Colors.black, fontWeight: FontWeight.bold),
+          //       ),
+          //     )),
           Row(
             children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                height: 40,
-                width: size.width * 0.80,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                  child: TextField(
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        labelText: "search",
-                        labelStyle: TextStyle(fontSize: 15.0),
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15.0,
-                        )),
-                    style: TextStyle(fontSize: 14.0),
-                  ),
-                ),
-              ),
-              Container(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: colorRedFigma,
-                        size: 40,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return VisitPlanAdd();
-                        }));
-                      }))
+              // Container(
+              //   margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              //   height: 40,
+              //   width: size.width * 0.65,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     border: Border.all(),
+              //     borderRadius: BorderRadius.circular(10),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+              //     child: TextField(
+              //       controller: searchController,
+              //       maxLines: 1,
+              //       decoration: InputDecoration(
+              //           border: InputBorder.none,
+              //           labelText: "search",
+              //           labelStyle: TextStyle(fontSize: 15.0),
+              //           hintStyle: TextStyle(
+              //             color: Colors.grey,
+              //             fontSize: 15.0,
+              //           )),
+              //       style: TextStyle(fontSize: 14.0),
+              //     ),
+              //   ),
+              // ),
+              // Container(
+              //     child: IconButton(
+              //         icon: Icon(
+              //           Icons.search,
+              //           color: colorRedFigma,
+              //           size: 40,
+              //         ),
+              //         onPressed: () {
+              //           BlocProvider.of<ListvisitplanblocBloc>(context).add(
+              //               ListvisitplanblocEventSearch(
+              //                   searchText: searchController.text));
+              //         })),
+              // Container(
+              //     child: TextButton(
+              //         child: Text(
+              //           "All",
+              //           style: TextStyle(color: colorRedFigma, fontSize: 15),
+              //         ),
+              //         onPressed: () {
+              //           // BlocProvider.of<ListcustomerblocBloc>(context)
+              //           //     .add(ListcustomerblocEventStarted());
+              //         })),
             ],
           ),
           ListTile(
             title: Text(
-                "Date : ${pickedDate.year}-${pickedDate.month}-${pickedDate.day}"),
+                "Date Start : ${_pickedDateStart.year}-${_pickedDateStart.month}-${_pickedDateStart.day}"),
             trailing: Icon(Icons.keyboard_arrow_down),
-            onTap: _pickDate,
+            onTap: _pickDateStart,
+            // onTap: _pickTime,
+          ),
+          ListTile(
+            title: Text(
+                "Date End : ${_pickedDateEnd.year}-${_pickedDateEnd.month}-${_pickedDateEnd.day}"),
+            trailing: Icon(Icons.keyboard_arrow_down),
+            onTap: _pickDateEnd,
             // onTap: _pickTime,
           ),
           Container(
-            height: size.height - 220,
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (_, index) {
-                return Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  height: 150,
-                  width: double.maxFinite,
-                  child: Card(
-                      elevation: 5,
-                      child: ListTile(
-                        title: Container(
-                          height: 30,
-                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          child: Text(
-                            "Budi",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        subtitle: Text(
-                          " Jln Soekarno Hatta 999 RT001 RW007 Kec BojongLoa Kaler kelurahan Bojong",
-                          maxLines: 3,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        trailing: Container(
-                          height: 30,
-                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: colorRedFigma,
-                          ),
-                        ),
-                        onTap: () {
-                          // (imageFile!= null)? showDialog(
-                          //     context: context,
-                          //     builder: (context) => DialogCheckIn()) : SizedBox();
-                          showDialog(
-                              context: context,
-                              builder: (context) => DialogCheckIn());
-                        },
-                      )),
-                );
-              },
-            ),
+              margin: EdgeInsets.only(left: 10),
+              child: ElevatedButton(
+                  child: Text(
+                    "Submit Date & Time",
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: colorRedFigma,
+                    onPrimary: Colors.white,
+                    shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  ),
+                  onPressed: () {
+                    //var berlinWallFellDate = new DateTime.utc(1989, 11, 9);
+                    if (_pickedDateEnd.compareTo(_pickedDateStart) < 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          duration: const Duration(seconds: 4),
+                          content: Text("Date Invalid")));
+                    } else {
+                      BlocProvider.of<ListvisitplanblocBloc>(context).add(
+                          ListvisitplanblocEventDateSearch(
+                              dateStart:
+                                  "${_pickedDateStart.year}-${_pickedDateStart.month}-${_pickedDateStart.day} 00:00:00",
+                              dateEnd:
+                                  "${_pickedDateEnd.year}-${_pickedDateEnd.month}-${_pickedDateEnd.day} 23:59:59"));
+                    }
+                  })),
+          Divider(
+            color: Colors.black,
           ),
+          BlocBuilder<ListvisitplanblocBloc, ListvisitplanblocState>(
+              builder: (context, state) {
+            if (state is ListvisitplanblocLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is ListvisitplanLoaded) {
+              return Container(
+                height: size.height - 420,
+                child: ListView.builder(
+                  itemCount: state.listVisitPlanModel.length,
+                  itemBuilder: (_, index) {
+                    return Container(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      height: 150,
+                      width: double.maxFinite,
+                      child: Card(
+                          elevation: 5,
+                          child: ListTile(
+                            title: Container(
+                              height: 30,
+                              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                state.listVisitPlanModel[index].customer,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            subtitle: Text(
+                              state.listVisitPlanModel[index].venue +
+                                  " Tanggal: " +
+                                  state.listVisitPlanModel[index].tanggal
+                                      .toString(),
+                              maxLines: 3,
+                              softWrap: true,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1
+                                  .copyWith(
+                                      color: Colors.black38,
+                                      fontWeight: FontWeight.bold),
+                            ),
+                            trailing: Container(
+                              height: 30,
+                              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: colorRedFigma,
+                              ),
+                            ),
+                            onTap: () {
+                              // (imageFile!= null)? showDialog(
+                              //     context: context,
+                              //     builder: (context) => DialogCheckIn()) : SizedBox();
+                              if (state.listVisitPlanModel[index].checkin ==
+                                  10) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => DialogCheckIn());
+                              }
+                            },
+                          )),
+                    );
+                  },
+                ),
+              );
+            } else if (state is ListvisitplanblocDataNull) {
+              return Center(
+                child: Container(
+                  child: Text(state.errorMessage.toString()),
+                ),
+              );
+            } else {
+              return Center(
+                child: Container(
+                  child: Text("No Data"),
+                ),
+              );
+            }
+          }),
         ],
       ),
     );
   }
-  _pickDate() async {
+
+  _pickDateStart() async {
     DateTime date = await showDatePicker(
         context: context,
-        initialDate: pickedDate,
+        initialDate: _pickedDateStart,
         firstDate: DateTime(DateTime.now().year - 5),
         lastDate: DateTime(DateTime.now().year + 5));
 
     if (date != null)
       setState(() {
-        pickedDate = date;
+        _pickedDateStart = date;
+      });
+  }
+
+  _pickDateEnd() async {
+    DateTime date = await showDatePicker(
+        context: context,
+        initialDate: _pickedDateEnd,
+        firstDate: DateTime(DateTime.now().year - 5),
+        lastDate: DateTime(DateTime.now().year + 5));
+
+    if (date != null)
+      setState(() {
+        _pickedDateEnd = date;
       });
   }
 }
 
 class DialogCheckIn extends StatefulWidget {
+//  final String id;
+//   const DialogCheckIn({Key key,this.id}): super(key: key);
   @override
   _DialogCheckInState createState() => _DialogCheckInState();
 }
 
 class _DialogCheckInState extends State<DialogCheckIn> {
   File imageFile;
+  // String id;
+
+  // _DialogCheckInState(this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -238,10 +350,7 @@ class _DialogCheckInState extends State<DialogCheckIn> {
                 SizedBox(
                   height: 24.0,
                 ),
-                RaisedButton(
-                  elevation: 0.0,
-                  padding: EdgeInsets.all(12.0),
-                  shape: StadiumBorder(),
+                ElevatedButton(
                   child: Text(
                     "Check In",
                     style: TextStyle(
@@ -249,10 +358,16 @@ class _DialogCheckInState extends State<DialogCheckIn> {
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  color: colorRedFigma,
+                  style: ElevatedButton.styleFrom(
+                    primary: colorRedFigma,
+                    onPrimary: Colors.white,
+                    minimumSize: Size(MediaQuery.of(context).size.width, 50),
+                    shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  ),
                   onPressed: () async {
                     // imageFile = await Navigator.push<File>(context,
-                    //     MaterialPageRoute(builder: (_) => CameraPageState()));
+                    //     MaterialPageRoute(builder: (_) => Camera2PageState()));
                     // setState(() {});
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (_) => CameraPageState()));
