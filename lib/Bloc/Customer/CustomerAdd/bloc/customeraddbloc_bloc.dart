@@ -43,33 +43,38 @@ class CustomeraddblocBloc
     }
 
     if (event is CustomeraddblocEventSave) {
-      yield CustomeraddblocLoading();
-      String sex;
-      if (event.model.sex.contains("Men")) {
-        sex = "P";
+      bool connect = await checkConnection.initConnectivity();
+      if (connect == false) {
+        yield CustomeraddblocFailure(errorMsg: noInternet);
       } else {
-        sex = "W";
-      }
-      CustomerAddModel model = new CustomerAddModel(
-          name: event.model.name,
-          alamat: event.model.alamat,
-          decisionmaker: "1",
-          email: "Udin@Ugg",
-          hp: "0000000",
-          kecamatan: "Bojong",
-          kelurahan: "Bojong",
-          kodepos: "4444",
-          kota: event.model.provinsi,
-          provinsi: event.model.provinsi,
-          sex: sex);
+        yield CustomeraddblocLoading();
+        String sex;
+        if (event.model.sex.contains("Men")) {
+          sex = "P";
+        } else {
+          sex = "W";
+        }
+        CustomerAddModel model = new CustomerAddModel(
+            name: event.model.name,
+            alamat: event.model.alamat,
+            decisionmaker: "1",
+            email: "Udin@Ugg",
+            hp: "0000000",
+            kecamatan: "Bojong",
+            kelurahan: "Bojong",
+            kodepos: "4444",
+            kota: event.model.provinsi,
+            provinsi: event.model.provinsi,
+            sex: sex);
 
-      bool saved = await _customerRepo.fetchAddCustomer(model);
+        bool saved = await _customerRepo.fetchAddCustomer(model);
 
-      if (saved == false) {
-        yield CustomeraddblocFailure(
-            errorMsg: "Failed Created Customer, Try Again");
-      } else {
-        yield CustomeraddblocSuccess(msg: "Data has been saved");
+        if (saved == false) {
+          yield CustomeraddblocFailure(
+              errorMsg: "Failed Created Customer, Try Again");
+        } else {
+          yield CustomeraddblocSuccess(msg: "Data has been saved");
+        }
       }
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:salesappmobile/Bloc/Menu/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
+
 import 'package:salesappmobile/Model/Customer/Dto/CustomerAddDto.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
@@ -133,46 +134,46 @@ class _CustomerFormState extends State<CustomerForm> {
                                   )),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                            child: Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text(
-                                  "Decision Maker ",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                )),
-                          ),
-                          Container(
-                            height: 50,
-                            padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                            decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: TextFormField(
-                              controller: decisionController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Enter Name';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  // labelText: "Name",
-                                  labelStyle: TextStyle(fontSize: 14.0),
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 10.0,
-                                  )),
-                              style: TextStyle(fontSize: 14.0),
-                            ),
-                          ),
+                          // Container(
+                          //   height: 30,
+                          //   margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                          //   child: Padding(
+                          //       padding: const EdgeInsets.only(left: 10),
+                          //       child: Text(
+                          //         "Decision Maker ",
+                          //         style: Theme.of(context)
+                          //             .textTheme
+                          //             .headline6
+                          //             .copyWith(
+                          //                 color: Colors.black,
+                          //                 fontWeight: FontWeight.bold),
+                          //       )),
+                          // ),
+                          // Container(
+                          //   height: 50,
+                          //   padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                          //   decoration: BoxDecoration(
+                          //       border: Border.all(),
+                          //       borderRadius: BorderRadius.circular(6)),
+                          //   child: TextFormField(
+                          //     controller: decisionController,
+                          //     validator: (value) {
+                          //       if (value == null || value.isEmpty) {
+                          //         return 'Enter Name';
+                          //       }
+                          //       return null;
+                          //     },
+                          //     decoration: InputDecoration(
+                          //         border: InputBorder.none,
+                          //         // labelText: "Name",
+                          //         labelStyle: TextStyle(fontSize: 14.0),
+                          //         hintStyle: TextStyle(
+                          //           color: Colors.grey,
+                          //           fontSize: 10.0,
+                          //         )),
+                          //     style: TextStyle(fontSize: 14.0),
+                          //   ),
+                          // ),
                           Container(
                             height: 30,
                             margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -228,30 +229,30 @@ class _CustomerFormState extends State<CustomerForm> {
                                           fontWeight: FontWeight.bold),
                                 )),
                           ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: tunaiValue,
-                                onChanged: (value) {
-                                  tunaiValue = !tunaiValue;
-                                  setState(() {});
-                                },
-                              ),
-                              Text('Tunai'),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(55, 0, 0, 0),
-                                child: Checkbox(
-                                  value: kreditValue,
-                                  onChanged: (value) {
-                                    kreditValue = !kreditValue;
-                                    setState(() {});
-                                    print(value);
-                                  },
-                                ),
-                              ),
-                              Text('Kredit')
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     Checkbox(
+                          //       value: tunaiValue,
+                          //       onChanged: (value) {
+                          //         tunaiValue = !tunaiValue;
+                          //         setState(() {});
+                          //       },
+                          //     ),
+                          //     Text('Tunai'),
+                          //     Container(
+                          //       padding: EdgeInsets.fromLTRB(55, 0, 0, 0),
+                          //       child: Checkbox(
+                          //         value: kreditValue,
+                          //         onChanged: (value) {
+                          //           kreditValue = !kreditValue;
+                          //           setState(() {});
+                          //           print(value);
+                          //         },
+                          //       ),
+                          //     ),
+                          //     Text('Kredit')
+                          //   ],
+                          // ),
                           Container(
                             height: 30,
                             margin: EdgeInsets.fromLTRB(0, 30, 0, 0),

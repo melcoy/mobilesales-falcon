@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 
-import 'package:salesappmobile/Bloc/Menu/Customer/CustomerAdd/bloc/customeraddbloc_bloc.dart';
-
-import 'package:salesappmobile/Bloc/Menu/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 import 'package:salesappmobile/Model/Customer/ListCustomerModel.dart';
-
-
 
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerDetail.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
 
 import 'CustomerForm.dart';
 
@@ -120,6 +116,7 @@ class _ListCustomerState extends State<ListCustomer> {
                         BlocProvider.of<ListcustomerblocBloc>(context).add(
                             ListcustomerblocEventSearch(
                                 searchText: editingController.text));
+                        print(editingController.text);
                       })),
               Container(
                   child: TextButton(
@@ -240,7 +237,7 @@ class _ListCustomerState extends State<ListCustomer> {
                 );
               }
             },
-          )
+          ),
         ],
       ),
     );

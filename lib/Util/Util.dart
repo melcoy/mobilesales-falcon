@@ -51,13 +51,14 @@ String dateFormat() {
   return formatted;
 }
 
-String timeFormat() {
+String timeFormat(int month) {
   DateTime now = new DateTime.now();
-  String currentDate = new DateFormat('y-MM-dd kk:mm').format(now);
-  var parsedDate = DateTime.parse(currentDate);
-  var formatter = new DateFormat('kk:mm');
-  String formatted = formatter.format(parsedDate);
-  return formatted;
+  var newDate = new DateTime(now.year, now.month + month, now.day);
+  String currentDate = new DateFormat('y-MM-dd').format(newDate);
+  // var parsedDate = DateTime.parse(currentDate);
+  // var formatter = new DateFormat('kk:mm');
+  // String formatted = formatter.format(parsedDate);
+  return currentDate.toString();
 }
 
 class CodeError {
