@@ -9,7 +9,8 @@ class VisitPlanProvider {
       String dateStart, String dateEnd) async {
     String session = await getSession();
     String id = await getIdUser();
-
+    print(dateStart);
+    print(dateEnd);
     final queryParameters = {
       'id': id,
       'session': session,
@@ -26,9 +27,9 @@ class VisitPlanProvider {
       if (response.statusCode == 200) {
         List<dynamic> listJsonCustomer =
             (decode as Map<String, dynamic>)['data'];
-
-        for (int i = 0; i < listJsonCustomer.length; i++)
+        for (int i = 0; i < listJsonCustomer.length; i++) {
           listVp.add(ListVisitPlanModel.fromJson(listJsonCustomer[i]));
+        }
 
         return listVp;
       } else {

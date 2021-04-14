@@ -22,7 +22,7 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
   String customerId = "Choose Customer";
   String customerName = "Choose Customer";
   String dmName = "Choose Customer";
-
+  TextEditingController addressController = new TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -192,6 +192,7 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
                               border: Border.all(),
                               borderRadius: BorderRadius.circular(6)),
                           child: TextFormField(
+                            controller: addressController,
                             maxLines: 5,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -248,16 +249,15 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
                                           content:
                                               Text('Please input some data')));
                                 } else {
-                                  // BlocProvider.of<VisitplanaddblocBloc>(context)
-                                  //     .add(VisitplanaddblocEventSave(model: VisitPlanAddModel()
-                                  //         ));
+                                  String schedule =
+                                      "${datePick(pickedDate)} ${time.hour}:${time.minute}:00";
+                                  BlocProvider.of<VisitplanaddblocBloc>(context)
+                                      .add(VisitplanaddblocEventSave(
+                                          model: VisitPlanAddModel(
+                                              customer: customerId,
+                                              tanggal: schedule,
+                                              venue: addressController.text)));
                                 }
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Login Data')));
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return Dashboard();
-                                }));
                               }
                             },
                           ),
