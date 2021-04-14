@@ -241,12 +241,12 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                               // (imageFile!= null)? showDialog(
                               //     context: context,
                               //     builder: (context) => DialogCheckIn()) : SizedBox();
-                              if (state.listVisitPlanModel[index].checkin ==
-                                  10) {
+                              if (state.listVisitPlanModel[index].checkin
+                                  .contains("10")) {
                                 showDialog(
                                     context: context,
                                     builder: (context) => DialogCheckIn());
-                              }
+                              } else {}
                             },
                           )),
                     );

@@ -24,8 +24,11 @@ class CustomerProvider {
         List<dynamic> listJsonCustomer =
             (decode as Map<String, dynamic>)['data'];
 
-        for (int i = 0; i < listJsonCustomer.length; i++)
+        //print(listJsonCustomer.length);
+        for (int i = 0; i < listJsonCustomer.length; i++) {
           listCustomer.add(ListCustomerModel.createList(listJsonCustomer[i]));
+          //print(listJsonCustomer[i]);
+        }
 
         return listCustomer;
       } else {

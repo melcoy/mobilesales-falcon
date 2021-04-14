@@ -10,6 +10,9 @@ const ipHost = "http://34.101.233.146:8069";
 const host = "34.101.233.146:8069";
 const apikey = "K22H6GAFS47WN5YCGOTD";
 const noInternet = "No Internet Connection";
+const cloudinaryAPIKey = '341321521312815';
+const cloudinaryAPISecret = '2623v9rkZAXBfh_GJpa3_F8Rw9c';
+const cloudinaryCloud = 'sinarmas-logistik';
 
 void saveDataUser(String session, String id, String pusat, String cabang,
     String subcabang) async {
@@ -51,9 +54,27 @@ String dateFormat() {
   return formatted;
 }
 
-String timeFormat(int month) {
+String timeFormatPlus(int month) {
   DateTime now = new DateTime.now();
   var newDate = new DateTime(now.year, now.month + month, now.day);
+  String currentDate = new DateFormat('y-MM-dd kk:mm:ss').format(newDate);
+  // var parsedDate = DateTime.parse(currentDate);
+  // var formatter = new DateFormat('kk:mm');
+  // String formatted = formatter.format(parsedDate);
+  return currentDate.toString();
+}
+
+String timeFormat(DateTime now) {
+  var newDate = new DateTime(now.year, now.month, now.day);
+  String currentDate = new DateFormat('y-MM-dd hh:mm:ss').format(newDate);
+  // var parsedDate = DateTime.parse(currentDate);
+  // var formatter = new DateFormat('kk:mm');
+  // String formatted = formatter.format(parsedDate);
+  return currentDate.toString();
+}
+
+String datePick(DateTime now) {
+  var newDate = new DateTime(now.year, now.month, now.day);
   String currentDate = new DateFormat('y-MM-dd').format(newDate);
   // var parsedDate = DateTime.parse(currentDate);
   // var formatter = new DateFormat('kk:mm');

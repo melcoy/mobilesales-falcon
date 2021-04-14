@@ -13,31 +13,31 @@ class ListVisitPlanModel {
     this.statusid,
   });
 
-  int customerid;
+  String customerid;
   String customer;
-  int id;
-  int checkin;
+  String id;
+  String checkin;
   String status;
-  bool pendingreason;
+  String pendingreason;
   String name;
   String venue;
-  DateTime tanggal;
-  bool catatanpending;
-  int statusid;
+  String tanggal;
+  String catatanpending;
+  String statusid;
 
   factory ListVisitPlanModel.fromJson(Map<String, dynamic> json) =>
       ListVisitPlanModel(
-        customerid: json["customerid"],
-        customer: json["customer"],
-        id: json["id"],
-        checkin: json["checkin"],
-        status: json["status"],
-        pendingreason: json["pendingreason"],
-        name: json["name"],
-        venue: json["venue"],
-        tanggal: DateTime.parse(json["tanggal"]),
-        catatanpending: json["catatanpending"],
-        statusid: json["statusid"],
+        customerid: json["customerid"].toString(),
+        customer: json["customer"].toString(),
+        id: json["id"].toString(),
+        checkin: json["checkin"].toString(),
+        status: json["status"].toString(),
+        pendingreason: json["pendingreason"].toString(),
+        name: json["name"].toString(),
+        venue: json["venue"].toString(),
+        tanggal: DateTime.parse(json["tanggal"]).toString(),
+        catatanpending: json["catatanpending"].toString(),
+        statusid: json["statusid"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +49,7 @@ class ListVisitPlanModel {
         "pendingreason": pendingreason,
         "name": name,
         "venue": venue,
-        "tanggal": tanggal.toIso8601String(),
+        "tanggal": tanggal,
         "catatanpending": catatanpending,
         "statusid": statusid,
       };

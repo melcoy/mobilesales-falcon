@@ -78,7 +78,6 @@ class _DialogCheckInState extends State<VisitPlanAddDialog> {
                         child: TextField(
                           controller: editingController,
                           maxLines: 1,
-                          //controller: editingController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                           ),
@@ -97,7 +96,6 @@ class _DialogCheckInState extends State<VisitPlanAddDialog> {
                               BlocProvider.of<ListcustomerblocBloc>(context)
                                   .add(ListcustomerblocEventSearch(
                                       searchText: editingController.text));
-                              print(editingController.text);
                             })),
                     Container(
                         child: TextButton(

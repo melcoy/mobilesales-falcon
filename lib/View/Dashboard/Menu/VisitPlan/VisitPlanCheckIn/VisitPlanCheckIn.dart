@@ -6,7 +6,6 @@ import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/Pe
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/SalesInput/VPListSalesInput.dart';
 
 class VisitPlanCheckIn extends StatelessWidget {
-  File imageFile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

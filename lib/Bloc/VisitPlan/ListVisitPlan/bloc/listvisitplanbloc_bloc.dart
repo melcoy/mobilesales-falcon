@@ -26,7 +26,7 @@ class ListvisitplanblocBloc
     } else {
       List<ListVisitPlanModel> listVp;
       listVp = await _visitPlanRepo.fetchListVp(
-          "${timeFormat(0)} 00:00:00", "${timeFormat(1)} 23:59:59");
+          "${timeFormatPlus(0)} 00:00:00", "${timeFormatPlus(1)} 23:59:59");
       if (event is ListvisitplanblocEventStarted) {
         if (listVp.isEmpty) {
           yield ListvisitplanblocDataNull("Visit Plan Empty");
@@ -55,8 +55,10 @@ class ListvisitplanblocBloc
 
       if (event is ListvisitplanblocEventDateSearch) {
         List<ListVisitPlanModel> listVpDate = [];
+
         listVpDate =
             await _visitPlanRepo.fetchListVp(event.dateStart, event.dateEnd);
+
         if (listVpDate.isEmpty) {
           yield ListvisitplanblocDataNull("Visit Plan Empty");
         } else {
