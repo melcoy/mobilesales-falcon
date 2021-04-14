@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:salesappmobile/Bloc/Login/bloc/loginbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/Report/ReportSales/bloc/reportsalesbloc_bloc.dart';
 
 
 import 'package:salesappmobile/Bloc/Spesification/bloc/listspesificationbloc_bloc.dart';
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
               create: (BuildContext context) => ListspesificationblocBloc(),
               child: ListTruck(),
             ),
-        '/ReportSales': (BuildContext context) => new ReportSales(),
+        '/ReportSales': (context) => BlocProvider<ReportsalesblocBloc>(
+              create: (BuildContext context) => ReportsalesblocBloc(),
+              child: ReportSales(),
+        )
       },
     );
   }

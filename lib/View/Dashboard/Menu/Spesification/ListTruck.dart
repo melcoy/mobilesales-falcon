@@ -92,66 +92,71 @@ class _ListTruckState extends State<ListTruck> {
             ],
           ),
           BlocBuilder<ListspesificationblocBloc, ListspesificationblocState>(
-            builder: (context, state) {
-              print(state);
-              if (state is ListspesificationblocLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is ListspesificationblocLoaded) {
-                _listTruckModel = state.listspesificationModel;
-                return Container(
-                  height: size.height - 250,
-                  child: ListView.builder(
-                    itemCount: _listTruckModel.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        height: 80,
-                        width: double.maxFinite,
-                        child: Card(
-                            elevation: 5,
-                            child: ListTile(
-                              title: Container(
-                                height: 30,
-                                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                child: Text(
-                                  _listTruckModel[index].name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                ),
+              builder: (context, state) {
+            print(state);
+            if (state is ListspesificationblocLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is ListspesificationblocLoaded) {
+              _listTruckModel = state.listspesificationModel;
+              return Container(
+                height: size.height - 250,
+                child: ListView.builder(
+                  itemCount: _listTruckModel.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      height: 80,
+                      width: double.maxFinite,
+                      child: Card(
+                          elevation: 5,
+                          child: ListTile(
+                            title: Container(
+                              height: 30,
+                              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                _listTruckModel[index].name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
                               ),
-                              trailing: Container(
-                                height: 30,
-                                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                child: Icon(
-                                  Icons.arrow_forward_ios_outlined,
-                                  color: colorRedFigma,
-                                ),
+                            ),
+                            trailing: Container(
+                              height: 30,
+                              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: colorRedFigma,
                               ),
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => BlocProvider<ListtrucktypeblocBloc> (
-                                      create: (BuildContext context) => ListtrucktypeblocBloc(),
-                                      child: ListTruckType(id: _listTruckModel[index].id,),
-                                    )));
-                              },
-                            )),
-                      );
-                    },
-                  ),
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          BlocProvider<ListtrucktypeblocBloc>(
+                                            create: (BuildContext context) =>
+                                                ListtrucktypeblocBloc(),
+                                            child: ListTruckType(
+                                              id: _listTruckModel[index].id,
+                                            ),
+                                          )));
+                            },
+                          )),
+                    );
+                  },
+                ),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
-          )
+          })
         ],
       ),
     );

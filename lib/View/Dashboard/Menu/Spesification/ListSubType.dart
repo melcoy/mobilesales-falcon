@@ -1,49 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/Spesification/ListProductDetail/bloc/listproductdetailbloc_bloc.dart';
 import 'package:salesappmobile/Bloc/Spesification/ListSubType/bloc/listsubtypebloc_bloc.dart';
-import 'package:salesappmobile/Bloc/Spesification/ListTruckType/bloc/listtrucktypebloc_bloc.dart';
 import 'package:salesappmobile/Model/spesification/ListSubTypeModel.dart';
-import 'package:salesappmobile/Model/spesification/ListTruckModel.dart';
-import 'package:salesappmobile/Model/spesification/ListTruckTypeModel.dart';
 import 'package:salesappmobile/Util/Util.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListSubType.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/Spesification/TruckDetail.dart';
 
-class ListTruckType extends StatefulWidget {
+class ListSubType extends StatefulWidget {
   final String id;
 
-  const ListTruckType({Key key, this.id}) : super(key: key);
+  const ListSubType({Key key, this.id}) : super(key: key);
 
   @override
-  _ListTruckTypeState createState() => _ListTruckTypeState(id);
+  _ListSubTypeState createState() => _ListSubTypeState(id);
 }
 
-class _ListTruckTypeState extends State<ListTruckType> {
-  List<ListTruckTypeModel> _listTruckTypeModel = [];
+class _ListSubTypeState extends State<ListSubType> {
+  List<ListSubTypeModel> _listSubTypeModel = [];
   String id;
-  _ListTruckTypeState(this.id);
+  _ListSubTypeState(this.id);
   @override
   void initState() {
     super.initState();
-    // print(id);
-    // print('Category name');
-    // print(_listTruckTypeModel);
-    BlocProvider.of<ListtrucktypeblocBloc>(context)
-        .add(ListtrucktypeblocEventStarted(id: id));
+    BlocProvider.of<ListsubtypeblocBloc>(context)
+        .add(ListsubtypeblocEventStarted(id: id));
+    // .add(ListtrucktypeblocEventStarted(id: id));
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // BlocBuilder<ListtrucktypeblocBloc, ListtrucktypeblocState>(
-    //           builder: (context, state) {
-    //         print(state);
-    //         if (state is ListtrucktypeblocLoading) {
-    //           return Center(
-    //             child: CircularProgressIndicator(),
-    //           );
-    //         } else if (state is ListtrucktypeblocLoaded) {
-    //           _listTruckTypeModel = state.listspesificationModel;
-    //         })
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -104,37 +90,37 @@ class _ListTruckTypeState extends State<ListTruckType> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return ListTruckType();
+                          return ListSubType();
                         }));
                       }))
             ],
           ),
-          BlocBuilder<ListtrucktypeblocBloc, ListtrucktypeblocState>(
+          BlocBuilder<ListsubtypeblocBloc, ListsubtypeblocState>(
               builder: (context, state) {
             print(state);
-            if (state is ListtrucktypeblocLoading) {
+            if (state is ListsubtypeblocLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is ListtrucktypeblocLoaded) {
-              _listTruckTypeModel = state.listspesificationModel;
+            } else if (state is ListsubtypeblocLoaded) {
+              _listSubTypeModel = state.listssubModel;
               return Container(
                 height: size.height - 210,
                 child: ListView.builder(
-                  itemCount: _listTruckTypeModel.length,
+                  itemCount: _listSubTypeModel.length,
                   itemBuilder: (context, index) {
                     return Container(
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      height: 80,
+                      height: 100,
                       width: double.maxFinite,
                       child: Card(
                           elevation: 5,
                           child: ListTile(
                             title: Container(
-                              height: 30,
+                              height: 100,
                               margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Text(
-                                _listTruckTypeModel[index].name,
+                                _listSubTypeModel[index].name,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6
@@ -156,11 +142,11 @@ class _ListTruckTypeState extends State<ListTruckType> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          BlocProvider<ListsubtypeblocBloc>(
+                                          BlocProvider<ListproductdetailblocBloc>(
                                             create: (BuildContext context) =>
-                                                ListsubtypeblocBloc(),
-                                            child: ListSubType(
-                                              id: _listTruckTypeModel[index].id,
+                                                ListproductdetailblocBloc(),
+                                            child: TruckDetail(
+                                              id: _listSubTypeModel[index].id,
                                             ),
                                           )));
                             },

@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:salesappmobile/Model/spesification/ListSubTypeModel.dart';
+import 'package:salesappmobile/Model/spesification/ListTruckDetailModel.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckModel.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckTypeModel.dart';
 import 'package:salesappmobile/Util/Util.dart';
@@ -32,7 +34,7 @@ class SpesificationProvider {
 
   Future<List<ListTruckTypeModel>> getListTruckType(String category) async {
     String idPusat = await getIdPusat();
-    
+
     final queryParameters = {
       'pusat': idPusat,
       'category': category,
@@ -61,5 +63,71 @@ class SpesificationProvider {
       return listTruckType;
     }
     return listTruckType;
+  }
+
+  Future<List<ListSubTypeModel>> getListSubType(String type) async {
+    // String idPusat = await getIdPusat();
+
+    final queryParameters = {
+      // 'pusat': idPusat,
+      'type': type,
+    };
+    final uri = Uri.http(host, '/api/ver1/product/subtype', queryParameters);
+
+    List<ListSubTypeModel> listSubType = [];
+    try {
+      http.Response response = await http.get(uri, headers: {"apikey": apikey});
+
+      var decode = json.decode(response.body);
+      // print(response.statusCode);
+      if (response.statusCode == 200) {
+        List<dynamic> listJsonSubType =
+            (decode as Map<String, dynamic>)['data'];
+        print(listJsonSubType);
+
+        for (int i = 0; i < listJsonSubType.length; i++) {
+          listSubType.add(ListSubTypeModel.createList(listJsonSubType[i]));
+        }
+      } else {
+        return listSubType;
+      }
+    } catch (error) {
+      return listSubType;
+    }
+    return listSubType;
+  }
+
+  Future<List<ListTruckDetailModel>> getProductDetail(String product) async {
+    final queryParameters = {
+      'product': product,
+    };
+    final uri = Uri.http(host, '/api/ver1/product/detail', queryParameters);
+
+    List<ListTruckDetailModel> listProductDetail = [];
+    try {
+      http.Response response = await http.get(uri, headers: {"apikey": apikey});
+
+      var decode = json.decode(response.body);
+      // print(response.statusCode);
+      if (response.statusCode == 200) {
+        List<dynamic> listJsonSubType =
+            (decode as Map<String, dynamic>)['data'];
+          print('listJsonSubType');
+        print(listJsonSubType);
+
+        for (int i = 0; i < listJsonSubType.length; i++) {
+          
+          listProductDetail
+              .add(ListTruckDetailModel.createList(listJsonSubType[i]));
+          print('listProductDetail');
+          print(listProductDetail);
+        }
+      } else {
+        return listProductDetail;
+      }
+    } catch (error) {
+      return listProductDetail;
+    }
+    return listProductDetail;
   }
 }
