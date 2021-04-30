@@ -97,7 +97,6 @@ class _ListSubTypeState extends State<ListSubType> {
           ),
           BlocBuilder<ListsubtypeblocBloc, ListsubtypeblocState>(
               builder: (context, state) {
-            print(state);
             if (state is ListsubtypeblocLoading) {
               return Center(
                 child: CircularProgressIndicator(),
