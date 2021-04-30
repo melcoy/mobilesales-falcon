@@ -46,11 +46,9 @@ class SpesificationProvider {
       http.Response response = await http.get(uri, headers: {"apikey": apikey});
 
       var decode = json.decode(response.body);
-      // print(response.statusCode);
       if (response.statusCode == 200) {
         List<dynamic> listJsonTrucktype =
             (decode as Map<String, dynamic>)['data'];
-        print(listJsonTrucktype);
 
         for (int i = 0; i < listJsonTrucktype.length; i++) {
           listTruckType
@@ -66,10 +64,8 @@ class SpesificationProvider {
   }
 
   Future<List<ListSubTypeModel>> getListSubType(String type) async {
-    // String idPusat = await getIdPusat();
 
     final queryParameters = {
-      // 'pusat': idPusat,
       'type': type,
     };
     final uri = Uri.http(host, '/api/ver1/product/subtype', queryParameters);
@@ -79,7 +75,6 @@ class SpesificationProvider {
       http.Response response = await http.get(uri, headers: {"apikey": apikey});
 
       var decode = json.decode(response.body);
-      // print(response.statusCode);
       if (response.statusCode == 200) {
         List<dynamic> listJsonSubType =
             (decode as Map<String, dynamic>)['data'];
@@ -108,7 +103,6 @@ class SpesificationProvider {
       http.Response response = await http.get(uri, headers: {"apikey": apikey});
 
       var decode = json.decode(response.body);
-      // print(response.statusCode);
       if (response.statusCode == 200) {
         List<dynamic> listJsonSubType =
             (decode as Map<String, dynamic>)['data'];

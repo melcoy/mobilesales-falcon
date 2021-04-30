@@ -26,7 +26,6 @@ class ListtrucktypeblocBloc
         yield ListtrucktypenblocFailure("Customer Null");
       } else {
         yield ListtrucktypeblocLoaded(listTrucktype);
-        // print(listTruck);
       }
     }
   }

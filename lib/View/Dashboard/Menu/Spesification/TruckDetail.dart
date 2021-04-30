@@ -20,8 +20,6 @@ class _TruckDetailState extends State<TruckDetail> {
   @override
   void initState() {
     super.initState();
-    print('----------------------------- id');
-    print(id);
     BlocProvider.of<ListproductdetailblocBloc>(context)
         .add(ListproductdetailblocEventStarted(id: id));
   }
