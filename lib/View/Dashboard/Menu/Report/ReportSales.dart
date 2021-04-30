@@ -10,10 +10,19 @@ class ReportSales extends StatefulWidget {
 }
 
 List<ReportSalesModel> _reportSaleModel = [];
+  double x = double.parse(_reportSaleModel.first.kunjunganAktual) *100 /double.parse(_reportSaleModel.first.targetKunjungan);
+  String value = x.toStringAsFixed(2).toString();
 
 class _ReportSalesState extends State<ReportSales> {
+  DateTime pickedDate;
+  String day;
+  String month;
+  String year;
   void initState() {
     super.initState();
+    pickedDate = DateTime.now();
+    print('pickedDate');
+    print(pickedDate.day + 30);
     BlocProvider.of<ReportsalesblocBloc>(context)
         .add(ReportsalesblocEventStarted());
   }
@@ -41,6 +50,7 @@ class _ReportSalesState extends State<ReportSales> {
             HeaderReport(),
             BlocBuilder<ReportsalesblocBloc, ReportsalesblocState>(
                 builder: (context, state) {
+              // double x = 90.8;
               if (state is ReportsalesblocLoading) {
                 return Padding(
                   padding: const EdgeInsets.all(50.0),
@@ -127,7 +137,8 @@ class _ReportSalesState extends State<ReportSales> {
                                 ),
                                 Container(
                                   height: 40,
-                                  child: Text('0',
+                                  child: Text(
+                                    '0',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1
@@ -209,7 +220,7 @@ class _ReportSalesState extends State<ReportSales> {
                                 Container(
                                   height: 40,
                                   child: Text(
-                                    _reportSaleModel[0].targetKunjungan*100,
+                                    value + '%',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1
@@ -236,6 +247,10 @@ class _ReportSalesState extends State<ReportSales> {
                         ),
                       ],
                     ));
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               }
             })
           ],
