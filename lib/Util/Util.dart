@@ -65,6 +65,7 @@ String timeFormatPlus(int month) {
 }
 
 
+
 String timeFormatOneMonth(int month) {
   DateTime now = new DateTime.now();
   var newDate = new DateTime(now.year, now.month - 1, now.day);
@@ -78,10 +79,11 @@ String timeFormatOneMonth(int month) {
 String timeFormat(DateTime now) {
   var newDate = new DateTime(now.year, now.month, now.day);
   String currentDate = new DateFormat('y-MM-dd').format(newDate);
-  // var parsedDate = DateTime.parse(currentDate);
-  // var formatter = new DateFormat('kk:mm');
-  // String formatted = formatter.format(parsedDate);
-  return currentDate.toString();
+=======
+String timeFormat(DateTime now) {
+  var newDate = new DateTime(now.year, now.month, now.day);
+  String currentDate = new DateFormat('y-MM-dd hh:mm:ss').format(newDate);
+
 }
 
 String datePick(DateTime now) {
