@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 }),
               ),
 
-              FlatButton(
+              TextButton(
                 child: Text("Do not have an Account ? Register Here"),
                 onPressed: () {
                   // Navigator.pushNamedAndRemoveUntil(

@@ -1,4 +1,5 @@
 import 'package:salesappmobile/ApiServices/Spesification/spesification_provider.dart';
+import 'package:salesappmobile/Model/spesification/ListAllTruckModel.dart';
 import 'package:salesappmobile/Model/spesification/ListSubTypeModel.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckDetailModel.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckModel.dart';
@@ -18,4 +19,7 @@ class SpesificationRepo {
 
   Future<List<ListTruckDetailModel>> getProductDetail(String product) =>
       _spesificationProvider.getProductDetail(product);
+
+  Future<List<ListAllTruckModel>> fetchAllProductDetail() =>
+      _spesificationProvider.getAllProduct();
 }

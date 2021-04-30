@@ -1,14 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/ListVisitPlan/bloc/listvisitplanbloc_bloc.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanAdd/bloc/visitplanaddbloc_bloc.dart';
-import 'package:salesappmobile/Model/Customer/ListCustomerModel.dart';
+import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanCheckIn/bloc/visitplancheckinbloc_bloc.dart';
+
+import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Util/CameraPageState.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
+
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanAdd/VisitPlanAdd.dart';
+
+import 'VisitPlanCheckIn/VisitPlanCheckIn.dart';
 
 class VisitPlanMenu extends StatefulWidget {
   @override
@@ -19,6 +22,7 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
   DateTime _pickedDateStart;
   DateTime _pickedDateEnd;
   TextEditingController searchController = new TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -238,6 +242,15 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                               ),
                             ),
                             onTap: () {
+                              CheckInDto model = CheckInDto(
+                                  idVisitPlan:
+                                      state.listVisitPlanModel[index].id,
+                                  address:
+                                      state.listVisitPlanModel[index].venue,
+                                  idCustomer: state
+                                      .listVisitPlanModel[index].customerid,
+                                  nama:
+                                      state.listVisitPlanModel[index].customer);
                               // (imageFile!= null)? showDialog(
                               //     context: context,
                               //     builder: (context) => DialogCheckIn()) : SizedBox();
@@ -245,8 +258,22 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                                   .contains("10")) {
                                 showDialog(
                                     context: context,
-                                    builder: (context) => DialogCheckIn());
-                              } else {}
+                                    builder: (context) => DialogCheckIn(
+                                          model: model,
+                                        ));
+                                setState(() {
+                                  BlocProvider.of<ListvisitplanblocBloc>(
+                                          context)
+                                      .add(ListvisitplanblocEventStarted());
+                                });
+                              } else {
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return VisitPlanCheckIn(
+                                    model: model,
+                                  );
+                                }));
+                              }
                             },
                           )),
                     );
@@ -300,17 +327,18 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
 }
 
 class DialogCheckIn extends StatefulWidget {
-//  final String id;
-//   const DialogCheckIn({Key key,this.id}): super(key: key);
+  final CheckInDto model;
+  const DialogCheckIn({Key key, this.model}) : super(key: key);
   @override
-  _DialogCheckInState createState() => _DialogCheckInState();
+  _DialogCheckInState createState() => _DialogCheckInState(model);
 }
 
 class _DialogCheckInState extends State<DialogCheckIn> {
-  File imageFile;
-  // String id;
+  //File imageFile;
 
-  // _DialogCheckInState(this.id);
+  CheckInDto model;
+
+  _DialogCheckInState(this.model);
 
   @override
   Widget build(BuildContext context) {
@@ -369,8 +397,16 @@ class _DialogCheckInState extends State<DialogCheckIn> {
                     // imageFile = await Navigator.push<File>(context,
                     //     MaterialPageRoute(builder: (_) => Camera2PageState()));
                     // setState(() {});
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (_) => CameraPageState()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                BlocProvider<VisitplancheckinblocBloc>(
+                                    create: (BuildContext context) =>
+                                        VisitplancheckinblocBloc(),
+                                    child: CameraPageState(
+                                      model: model,
+                                    ))));
                   },
                 ),
                 TextButton(

@@ -6,8 +6,10 @@ import 'package:http/http.dart' as http;
 
 const colorRedFigma = const Color(0xffEB5757);
 const colorRedFigmapastel = const Color(0xffFD9898);
-const ipHost = "http://192.168.137.192:8069";
-const host = "192.168.137.192:8069";
+
+const ipHost = "http://103.25.222.131:8069";
+const host = "103.25.222.131:8069";
+
 const apikey = "K22H6GAFS47WN5YCGOTD";
 const noInternet = "No Internet Connection";
 const cloudinaryAPIKey = '341321521312815';

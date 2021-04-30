@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/Spesification/ListProductDetail/bloc/listproductdetailbloc_bloc.dart';
 import 'package:salesappmobile/Model/spesification/Dto/ListTruckDetailDTO.dart';
-import 'package:salesappmobile/Model/spesification/ListTruckDetailModel.dart';
+
 import 'package:salesappmobile/Util/Util.dart';
 
 class TruckDetail extends StatefulWidget {
@@ -45,7 +45,6 @@ class _TruckDetailState extends State<TruckDetail> {
         body:
             BlocBuilder<ListproductdetailblocBloc, ListproductdetailblocState>(
                 builder: (context, state) {
-          String pembayaran;
           if (state is ListproductdetailblocLoading) {
             return Center(
               child: CircularProgressIndicator(),

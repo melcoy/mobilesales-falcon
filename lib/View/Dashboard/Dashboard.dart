@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:salesappmobile/ApiServices/Spesification/spesification_repo.dart';
 import 'package:salesappmobile/ApiServices/VisitPlan/visitplan_repo.dart';
-import 'package:salesappmobile/Model/VisitPlan/ListVisitPlanModel.dart';
-import 'package:salesappmobile/Util/GetLocation.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Header/HeaderDashboard.dart';
@@ -10,11 +8,9 @@ import 'package:salesappmobile/View/Dashboard/Menu/MenuDashboard.dart';
 
 class Dashboard extends StatelessWidget {
   static const idScreen = "dashboard";
-  final VisitPlanRepo _masterRepo = VisitPlanRepo();
 
-  final GetLocation _getLocation = GetLocation();
-  //final CustomerRepo _customerRepo = CustomerRepo();
-  List<ListVisitPlanModel> list = [];
+  SpesificationRepo repo = SpesificationRepo();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,14 +26,7 @@ class Dashboard extends StatelessWidget {
               size: 30,
             ),
             onPressed: () async {
-              // bool login = await _apiCustomerRepo.fetchListCustomer();
-              //list = await _masterRepo.fetchListVp(
-              //"2021-04-06 00:00:00", "2021-04-06 23:59:00");
-              //print(timeFormat(1));
-              //bool cust = await _customerRepo.fetchAddCustomer();
-              //print("Cus" + cust.toString());
-              //print(datePick());
-              //var loc = await _getLocation.getLocation();
+              print(repo.fetchAllProductDetail());
             },
           ),
         ],
