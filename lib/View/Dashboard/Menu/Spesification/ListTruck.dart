@@ -93,7 +93,6 @@ class _ListTruckState extends State<ListTruck> {
           ),
           BlocBuilder<ListspesificationblocBloc, ListspesificationblocState>(
               builder: (context, state) {
-            print(state);
             if (state is ListspesificationblocLoading) {
               return Center(
                 child: CircularProgressIndicator(),

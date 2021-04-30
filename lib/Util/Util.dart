@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 
 const colorRedFigma = const Color(0xffEB5757);
 const colorRedFigmapastel = const Color(0xffFD9898);
-const ipHost = "http://34.101.233.146:8069";
-const host = "34.101.233.146:8069";
+const ipHost = "http://192.168.137.192:8069";
+const host = "192.168.137.192:8069";
 const apikey = "K22H6GAFS47WN5YCGOTD";
 const noInternet = "No Internet Connection";
 const cloudinaryAPIKey = '341321521312815';
@@ -64,13 +64,26 @@ String timeFormatPlus(int month) {
   return currentDate.toString();
 }
 
-String timeFormat(DateTime now) {
-  var newDate = new DateTime(now.year, now.month, now.day);
-  String currentDate = new DateFormat('y-MM-dd hh:mm:ss').format(newDate);
+
+
+String timeFormatOneMonth(int month) {
+  DateTime now = new DateTime.now();
+  var newDate = new DateTime(now.year, now.month - 1, now.day);
+  String currentDate = new DateFormat('y-MM-dd').format(newDate);
   // var parsedDate = DateTime.parse(currentDate);
   // var formatter = new DateFormat('kk:mm');
   // String formatted = formatter.format(parsedDate);
   return currentDate.toString();
+}
+
+String timeFormat(DateTime now) {
+  var newDate = new DateTime(now.year, now.month, now.day);
+  String currentDate = new DateFormat('y-MM-dd').format(newDate);
+=======
+String timeFormat(DateTime now) {
+  var newDate = new DateTime(now.year, now.month, now.day);
+  String currentDate = new DateFormat('y-MM-dd hh:mm:ss').format(newDate);
+
 }
 
 String datePick(DateTime now) {

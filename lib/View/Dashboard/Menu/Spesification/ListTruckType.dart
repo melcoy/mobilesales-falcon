@@ -24,9 +24,6 @@ class _ListTruckTypeState extends State<ListTruckType> {
   @override
   void initState() {
     super.initState();
-    // print(id);
-    // print('Category name');
-    // print(_listTruckTypeModel);
     BlocProvider.of<ListtrucktypeblocBloc>(context)
         .add(ListtrucktypeblocEventStarted(id: id));
   }
@@ -34,16 +31,6 @@ class _ListTruckTypeState extends State<ListTruckType> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // BlocBuilder<ListtrucktypeblocBloc, ListtrucktypeblocState>(
-    //           builder: (context, state) {
-    //         print(state);
-    //         if (state is ListtrucktypeblocLoading) {
-    //           return Center(
-    //             child: CircularProgressIndicator(),
-    //           );
-    //         } else if (state is ListtrucktypeblocLoaded) {
-    //           _listTruckTypeModel = state.listspesificationModel;
-    //         })
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -111,7 +98,6 @@ class _ListTruckTypeState extends State<ListTruckType> {
           ),
           BlocBuilder<ListtrucktypeblocBloc, ListtrucktypeblocState>(
               builder: (context, state) {
-            print(state);
             if (state is ListtrucktypeblocLoading) {
               return Center(
                 child: CircularProgressIndicator(),

@@ -32,7 +32,7 @@ class ListspesificationblocBloc
           yield ListspesificationblocFailure("Spec Null");
         } else {
           yield ListspesificationblocLoaded(listTruck);
-          // print(listTruck);
+
         }
       }
     }

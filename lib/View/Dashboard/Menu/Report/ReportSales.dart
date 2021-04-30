@@ -20,9 +20,6 @@ class _ReportSalesState extends State<ReportSales> {
   String year;
   void initState() {
     super.initState();
-    pickedDate = DateTime.now();
-    print('pickedDate');
-    print(pickedDate.day + 30);
     BlocProvider.of<ReportsalesblocBloc>(context)
         .add(ReportsalesblocEventStarted());
   }
@@ -249,7 +246,10 @@ class _ReportSalesState extends State<ReportSales> {
                     ));
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(50.0),
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               }
             })
@@ -403,9 +403,7 @@ class HeaderReport extends StatelessWidget {
               ),
             );
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Container();
           }
         })
       ],
