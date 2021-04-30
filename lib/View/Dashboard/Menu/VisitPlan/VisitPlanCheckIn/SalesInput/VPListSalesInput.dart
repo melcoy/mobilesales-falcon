@@ -37,6 +37,7 @@ class _VisitPlanMenuState extends State<VPListSalesInput> {
               .headline6
               .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        
         actions: <Widget>[
           IconButton(
               icon: Icon(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:salesappmobile/Model/spesification/ListAllTruckModel.dart';
 import 'package:salesappmobile/Model/spesification/ListSubTypeModel.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckDetailModel.dart';
 import 'package:salesappmobile/Model/spesification/ListTruckModel.dart';
@@ -112,15 +113,10 @@ class SpesificationProvider {
       if (response.statusCode == 200) {
         List<dynamic> listJsonSubType =
             (decode as Map<String, dynamic>)['data'];
-          print('listJsonSubType');
-        print(listJsonSubType);
 
         for (int i = 0; i < listJsonSubType.length; i++) {
-          
           listProductDetail
               .add(ListTruckDetailModel.createList(listJsonSubType[i]));
-          print('listProductDetail');
-          print(listProductDetail);
         }
       } else {
         return listProductDetail;
@@ -129,5 +125,33 @@ class SpesificationProvider {
       return listProductDetail;
     }
     return listProductDetail;
+  }
+
+  Future<List<ListAllTruckModel>> getAllProduct() async {
+    final queryParameters = {'pusatid': "1", 'optional': "4"};
+
+    final uri = Uri.http(host, '/api/ver1/product/all', queryParameters);
+
+    List<ListAllTruckModel> listAllProductDetail = [];
+    try {
+      http.Response response = await http.get(uri, headers: {"apikey": apikey});
+
+      var decode = json.decode(response.body);
+
+      if (response.statusCode == 200) {
+        List<dynamic> listJsonSubType =
+            (decode as Map<String, dynamic>)['data'];
+
+        for (int i = 0; i < listJsonSubType.length; i++) {
+          listAllProductDetail
+              .add(ListAllTruckModel.fromJson(listJsonSubType[i]));
+        }
+      } else {
+        return listAllProductDetail;
+      }
+    } catch (error) {
+      return listAllProductDetail;
+    }
+    return listAllProductDetail;
   }
 }

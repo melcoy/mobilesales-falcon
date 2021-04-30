@@ -190,8 +190,6 @@ class _ListCustomerState extends State<ListCustomer> {
                                 ),
                               ),
                               onTap: () {
-                                print(_listCustomerModel[index].dm);
-
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return CustomerDetail(

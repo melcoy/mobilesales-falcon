@@ -49,48 +49,48 @@ class _ListTruckState extends State<ListTruck> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                height: 40,
-                width: size.width * 0.80,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: TextField(
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        labelText: "search",
-                        labelStyle: TextStyle(fontSize: 15.0),
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15.0,
-                        )),
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                ),
-              ),
-              Container(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: colorRedFigma,
-                        size: 40,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return ListTruck();
-                        }));
-                      }))
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.fromLTRB(20, 10, 10, 10),
+          //       height: 40,
+          //       width: size.width * 0.80,
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         border: Border.all(),
+          //         borderRadius: BorderRadius.circular(5),
+          //       ),
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+          //         child: TextField(
+          //           maxLines: 1,
+          //           decoration: InputDecoration(
+          //               border: InputBorder.none,
+          //               labelText: "search",
+          //               labelStyle: TextStyle(fontSize: 15.0),
+          //               hintStyle: TextStyle(
+          //                 color: Colors.grey,
+          //                 fontSize: 15.0,
+          //               )),
+          //           style: TextStyle(fontSize: 20.0),
+          //         ),
+          //       ),
+          //     ),
+          //     Container(
+          //         child: IconButton(
+          //             icon: Icon(
+          //               Icons.search,
+          //               color: colorRedFigma,
+          //               size: 40,
+          //             ),
+          //             onPressed: () {
+          //               Navigator.push(context,
+          //                   MaterialPageRoute(builder: (context) {
+          //                 return ListTruck();
+          //               }));
+          //             }))
+          //   ],
+          // ),
           BlocBuilder<ListspesificationblocBloc, ListspesificationblocState>(
               builder: (context, state) {
             print(state);

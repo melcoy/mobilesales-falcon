@@ -1,11 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanPending/bloc/visitplanpendingbloc_bloc.dart';
+import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/Pending/VPPending.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/SalesInput/VPListSalesInput.dart';
 
 class VisitPlanCheckIn extends StatelessWidget {
+  final CheckInDto model;
+  VisitPlanCheckIn({this.model});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +63,7 @@ class VisitPlanCheckIn extends StatelessWidget {
                     height: 30,
                     margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
-                      "Budi",
+                      model.nama,
                       style: Theme.of(context).textTheme.headline6.copyWith(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
@@ -72,7 +75,7 @@ class VisitPlanCheckIn extends StatelessWidget {
                         color: colorRedFigma,
                       )),
                   subtitle: Text(
-                    " Jln Soekarno Hatta 999 RT001 RW007 Kec BojongLoa Kaler kelurahan Bojong",
+                    model.address,
                     maxLines: 3,
                     softWrap: true,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -83,10 +86,14 @@ class VisitPlanCheckIn extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.height,
             margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
-            child: RaisedButton(
-              elevation: 0.0,
-              padding: EdgeInsets.all(12.0),
-              shape: StadiumBorder(),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: colorRedFigma,
+                onPrimary: Colors.white,
+                minimumSize: Size(MediaQuery.of(context).size.width, 50),
+                shape: const BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+              ),
               child: Text(
                 "Add",
                 style: TextStyle(
@@ -94,7 +101,6 @@ class VisitPlanCheckIn extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
-              color: colorRedFigma,
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return VPListSalesInput();
@@ -105,10 +111,14 @@ class VisitPlanCheckIn extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.height,
             margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
-            child: RaisedButton(
-              elevation: 0.0,
-              padding: EdgeInsets.all(12.0),
-              shape: StadiumBorder(),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: colorRedFigma,
+                onPrimary: Colors.white,
+                minimumSize: Size(MediaQuery.of(context).size.width, 50),
+                shape: const BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+              ),
               child: Text(
                 "Pending",
                 style: TextStyle(
@@ -116,11 +126,16 @@ class VisitPlanCheckIn extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
-              color: colorRedFigma,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return VPPending();
-                }));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            BlocProvider<VisitplanpendingblocBloc>(
+                              create: (BuildContext context) =>
+                                  VisitplanpendingblocBloc(),
+                              child: VPPending(),
+                            )));
               },
             ),
           ),

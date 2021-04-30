@@ -13,7 +13,6 @@ class _DialogCheckInState extends State<VisitPlanAddDialog> {
   TextEditingController editingController = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<ListcustomerblocBloc>(context)
         .add(ListcustomerblocEventStarted());
@@ -67,7 +66,7 @@ class _DialogCheckInState extends State<VisitPlanAddDialog> {
                     Container(
                       margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
                       height: 40,
-                      width: size.width * 0.45,
+                      width: size.width * 0.35,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(),

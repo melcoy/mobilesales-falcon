@@ -7,8 +7,8 @@ class GetLocation {
     try {
       currentLocation = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      coordinate.add("Lat:" + currentLocation.latitude.toString());
-      coordinate.add("Long:" + currentLocation.longitude.toString());
+      coordinate.add(currentLocation.latitude.toString());
+      coordinate.add(currentLocation.longitude.toString());
 
       return coordinate;
     } catch (error) {
