@@ -145,8 +145,7 @@ class VisitPlanProvider {
     }
   }
 
-  Future<List<dynamic>> updateStatusVisitPlan(
-      String status, String visitPlanId) async {
+  Future<bool> updateStatusVisitPlan(String status, String visitPlanId) async {
     String session = await getSession();
     String id = await getIdUser();
 
@@ -158,8 +157,6 @@ class VisitPlanProvider {
     final uri = Uri.http(
         host, '/api/ver1/salesman/visitplan/update/status', queryParameters);
 
-    List<dynamic> listJsonVP;
-
     Map credential = {'status': status};
     try {
       var body = json.encode(credential);
@@ -167,15 +164,45 @@ class VisitPlanProvider {
           await http.post(uri, headers: {"apikey": apikey}, body: body);
       var decode = json.decode(response.body);
       if (response.statusCode == 200) {
-        listJsonVP = decode['data'];
-
-        return listJsonVP;
+        print(decode.toString());
+        return true;
       } else {
-        return listJsonVP;
+        return false;
       }
     } catch (error) {
       print("try" + error.toString());
-      return listJsonVP;
+      return false;
+    }
+  }
+
+  Future<bool> markPendingReason(
+      String statusPending, String visitPlanId, String pendingNote) async {
+    String session = await getSession();
+    String id = await getIdUser();
+
+    final queryParameters = {
+      'id': id,
+      'session': session,
+      'visitplan': visitPlanId
+    };
+    final uri = Uri.http(
+        host, '/api/ver1/salesman/visitplan/update/pending', queryParameters);
+
+    Map credential = {'pending': statusPending, 'pendingnote': pendingNote};
+    try {
+      var body = json.encode(credential);
+      http.Response response =
+          await http.post(uri, headers: {"apikey": apikey}, body: body);
+      var decode = json.decode(response.body);
+      if (response.statusCode == 200) {
+        print(decode.toString());
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      print("try" + error.toString());
+      return false;
     }
   }
 

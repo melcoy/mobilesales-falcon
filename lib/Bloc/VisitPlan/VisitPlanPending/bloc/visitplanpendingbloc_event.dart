@@ -9,7 +9,11 @@ class VisitplanpendingblocEventSavePressed extends VisitplanpendingblocEvent {
   final String idStatusVP;
   final String idPendingReason;
   final String pendingNote;
+  final String idVisitPlan;
 
   VisitplanpendingblocEventSavePressed(
-      {this.idPendingReason, this.idStatusVP, this.pendingNote});
+      {@required this.idPendingReason,
+      @required this.idStatusVP,
+      @required this.pendingNote,
+      @required this.idVisitPlan});
 }

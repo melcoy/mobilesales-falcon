@@ -44,7 +44,24 @@ class VisitplanpendingblocBloc
     }
 
     if (event is VisitplanpendingblocEventSavePressed) {
-      if (connect == true) {}
+      if (connect == true) {
+        yield VisitplanpendingblocLoading();
+        bool savedVP = await _visitPlanRepo.fetchUpdateStatusVisitPlan(
+            event.idStatusVP, event.idVisitPlan);
+
+        bool savedMarkReason = await _visitPlanRepo.fetchMarkPendingReason(
+            event.idPendingReason, event.idVisitPlan, event.pendingNote);
+        if (savedVP != false && savedMarkReason != false) {
+          yield VisitplanpendingblocSuccess(
+              succMsg: "Data has been Succesfuly Added");
+        } else {
+          yield VisitplanpendingblocFaillure(errMsg: "Data Error");
+        }
+      } else {
+        yield VisitplanpendingblocFaillure(
+          errMsg: noInternet,
+        );
+      }
     }
   }
 }

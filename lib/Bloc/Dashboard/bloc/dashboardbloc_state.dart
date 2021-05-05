@@ -8,12 +8,12 @@ class DashboardblocInitial extends DashboardblocState {}
 class DashboardblocLoading extends DashboardblocState {}
 
 class DashboardblocSuccess extends DashboardblocState {
-  DashboardModel model;
+  final DashboardModel model;
   DashboardblocSuccess(this.model);
 }
 
 class DashboardblocFailure extends DashboardblocState {
-  String errMsg;
+  final String errMsg;
 
   DashboardblocFailure(this.errMsg);
 }

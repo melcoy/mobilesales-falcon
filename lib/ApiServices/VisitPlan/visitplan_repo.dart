@@ -20,4 +20,11 @@ class VisitPlanRepo {
 
   Future<List<dynamic>> fetchPendingReasonVisitPlan() =>
       _visitPlanProvider.getPendingReasonVisitPlan();
+
+  Future<bool> fetchUpdateStatusVisitPlan(String status, String visitPlanId) =>
+      _visitPlanProvider.updateStatusVisitPlan(status, visitPlanId);
+
+  Future<bool> fetchMarkPendingReason(
+          String status, String visitPlanId, String pendingNote) =>
+      _visitPlanProvider.markPendingReason(status, visitPlanId, pendingNote);
 }

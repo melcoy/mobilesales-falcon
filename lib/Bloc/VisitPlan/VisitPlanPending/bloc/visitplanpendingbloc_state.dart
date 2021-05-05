@@ -8,14 +8,20 @@ class VisitplanpendingblocInitial extends VisitplanpendingblocState {}
 class VisitplanpendingblocLoading extends VisitplanpendingblocState {}
 
 class VisitplanpendingblocLoaded extends VisitplanpendingblocState {
-  List<dynamic> listStatusPending;
-  List<dynamic> listReason;
+  final List<dynamic> listStatusPending;
+  final List<dynamic> listReason;
   VisitplanpendingblocLoaded(
       {@required this.listStatusPending, @required this.listReason});
 }
 
 class VisitplanpendingblocFaillure extends VisitplanpendingblocState {
-  String errMsg;
+  final String errMsg;
 
   VisitplanpendingblocFaillure({@required this.errMsg});
+}
+
+class VisitplanpendingblocSuccess extends VisitplanpendingblocState {
+  final String succMsg;
+
+  VisitplanpendingblocSuccess({@required this.succMsg});
 }
