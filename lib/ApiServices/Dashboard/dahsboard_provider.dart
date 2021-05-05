@@ -11,13 +11,11 @@ class DashboardProvider {
     final queryParameters = {
       'id': id,
       'session': session,
-      'start': dateStart,
-      'end': dateEnd
+      'start': "2021-03-16 00:00:00",
+      'end': "2021-04-16 12:00:00"
     };
 
     final uri = Uri.http(host, '/api/ver1/salesman/kpi/', queryParameters);
-
-    DashboardModel model;
 
     try {
       http.Response response = await http.get(uri, headers: {"apikey": apikey});
@@ -28,7 +26,8 @@ class DashboardProvider {
       if (response.statusCode == 200) {
         // List<dynamic> listJsonVp = (decode as Map<String, dynamic>)['data'];
         // print(listJsonVp);
-        model = DashboardModel.fromJson(decode['data'][0]);
+        print(decode['data'][0]);
+        DashboardModel model = DashboardModel.fromJson(decode['data'][0]);
 
         return model;
       } else {

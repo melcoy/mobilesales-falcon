@@ -17,4 +17,7 @@ class SalesinputblocLoaded extends SalesinputblocState {
   SalesinputblocLoaded({@required this.listAllProduct});
 }
 
-class SalesinputblocSaved extends SalesinputblocState {}
+class SalesinputblocSaved extends SalesinputblocState {
+  final String savedMsg;
+  SalesinputblocSaved({@required this.savedMsg});
+}

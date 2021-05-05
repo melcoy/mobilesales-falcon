@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesappmobile/Bloc/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/Sales/ListSales/bloc/listsalesbloc_bloc.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanPending/bloc/visitplanpendingbloc_bloc.dart';
 import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Util/Util.dart';
@@ -102,9 +104,15 @@ class VisitPlanCheckIn extends StatelessWidget {
                     color: Colors.white),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return VPListSalesInput();
-                }));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BlocProvider<ListsalesblocBloc>(
+                            create: (BuildContext context) =>
+                                ListsalesblocBloc(),
+                            child: VPListSalesInput(
+                              model: model,
+                            ))));
               },
             ),
           ),
@@ -134,7 +142,9 @@ class VisitPlanCheckIn extends StatelessWidget {
                             BlocProvider<VisitplanpendingblocBloc>(
                               create: (BuildContext context) =>
                                   VisitplanpendingblocBloc(),
-                              child: VPPending(),
+                              child: VPPending(
+                                model: model,
+                              ),
                             )));
               },
             ),

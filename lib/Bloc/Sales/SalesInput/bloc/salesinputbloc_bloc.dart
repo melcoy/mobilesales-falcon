@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:salesappmobile/ApiServices/Sales/sales_repo.dart';
 import 'package:salesappmobile/ApiServices/Spesification/spesification_repo.dart';
+import 'package:salesappmobile/Model/Sales/Dto/SalesInputSavedDto.dart';
 import 'package:salesappmobile/Model/spesification/ListAllTruckModel.dart';
 import 'package:salesappmobile/Util/Connection.dart';
 import 'package:salesappmobile/Util/Util.dart';
@@ -15,6 +17,7 @@ class SalesinputblocBloc
   SalesinputblocBloc() : super(SalesinputblocInitial());
   final Connection checkConnection = Connection();
   final SpesificationRepo _spesificationRepo = SpesificationRepo();
+  final SalesRepo _salesRepo = SalesRepo();
   @override
   Stream<SalesinputblocState> mapEventToState(
     SalesinputblocEvent event,
@@ -54,6 +57,18 @@ class SalesinputblocBloc
           yield SalesinputblocLoaded(listAllProduct: listAllProductSearch);
         } else {
           yield SalesinputblocFailure(errMsg: "Null");
+        }
+      }
+
+      if (event is SaleSalesinputblocEventSaved) {
+        yield SalesinputblocLoading();
+        bool saved = await _salesRepo.fetchSales(event.model);
+
+        if (saved == false) {
+          yield SalesinputblocFailure(
+              errMsg: "Sales Input Failed, Please Try Again Later");
+        } else {
+          yield SalesinputblocSaved(savedMsg: "Sales has succesfully added");
         }
       }
     }

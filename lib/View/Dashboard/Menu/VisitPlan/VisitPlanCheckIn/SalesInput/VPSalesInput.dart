@@ -2,27 +2,68 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/Sales/SalesInput/bloc/salesinputbloc_bloc.dart';
+import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Model/spesification/Dto/ListAllTruckDTO.dart';
 import 'package:salesappmobile/Util/Util.dart';
+import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/SalesInput/VPSalesInputConfirmDialog.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/SalesInput/VPSalesInputTruckDialog.dart';
 
 class VPSalesInput extends StatefulWidget {
+  final CheckInDto model;
+  const VPSalesInput({Key key, this.model}) : super(key: key);
+
   @override
-  _VPSalesInputState createState() => _VPSalesInputState();
+  _VPSalesInputState createState() => _VPSalesInputState(model);
 }
 
 class _VPSalesInputState extends State<VPSalesInput> {
+  CheckInDto model;
+  _VPSalesInputState(this.model);
+
+  TextEditingController qtyController = new TextEditingController();
+  TextEditingController bonusAddController = new TextEditingController();
   bool value = false;
   bool tunaiValue = false;
   bool kreditValue = false;
+  bool plusAdd = false;
+  double total = 0;
+  String percent = "100.0";
   String val;
   String truckChoose;
   String chooseProduct = "Choose Product";
   String discount = "";
   String bonus = "";
+  String idProduct = "";
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    Widget iconButton = IconButton(
+        icon: Icon(
+          Icons.add,
+          color: colorRedFigma,
+          size: 30,
+        ),
+        onPressed: () async {
+          ListAllTruckDto model = await showDialog(
+              context: context,
+              builder: (context) => BlocProvider<SalesinputblocBloc>(
+                  create: (BuildContext context) => SalesinputblocBloc(),
+                  child: VPSalesInputTruckDialog()));
+          if (model != null) {
+            setState(() {
+              idProduct = model.id;
+              chooseProduct = model.type;
+              discount = (double.parse(model.discount) * 100).toString();
+              total = double.parse(model.harga) -
+                  double.parse(model.harga) * double.parse(model.discount);
+
+              for (int i = 0; i < model.bonus.length; i++) {
+                bonus += model.bonus[i] + " ";
+              }
+              plusAdd = true;
+            });
+          }
+        });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -96,36 +137,12 @@ class _VPSalesInputState extends State<VPSalesInput> {
                             chooseProduct,
                             style: Theme.of(context)
                                 .textTheme
-                                .headline6
+                                .bodyText2
                                 .copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
                           )),
-                      IconButton(
-                          icon: Icon(
-                            Icons.add,
-                            color: colorRedFigma,
-                            size: 30,
-                          ),
-                          onPressed: () async {
-                            ListAllTruckDto model = await showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    BlocProvider<SalesinputblocBloc>(
-                                        create: (BuildContext context) =>
-                                            SalesinputblocBloc(),
-                                        child: VPSalesInputTruckDialog()));
-                            if (model != null) {
-                              setState(() {
-                                chooseProduct = model.type;
-                                discount = model.discount;
-
-                                for (int i = 0; i < model.bonus.length; i++) {
-                                  bonus += model.bonus[i] + " ";
-                                }
-                              });
-                            }
-                          })
+                      plusAdd == false ? iconButton : Container()
                     ],
                   ),
                   SizedBox(
@@ -138,7 +155,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
                     child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          "Discount : " + discount,
+                          "Discount : " + discount + "%",
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               color: Colors.black, fontWeight: FontWeight.bold),
                         )),
@@ -177,6 +194,21 @@ class _VPSalesInputState extends State<VPSalesInput> {
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               color: Colors.black, fontWeight: FontWeight.bold),
                         )),
+                  ),
+
+                  Container(
+                    height: 30,
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Price : " + total.toStringAsFixed(0),
+                          style: Theme.of(context).textTheme.headline6.copyWith(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 20.0,
                   ),
                   Row(
                     children: [
@@ -217,7 +249,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
                   ),
                   Container(
                     height: 30,
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
@@ -227,16 +259,18 @@ class _VPSalesInputState extends State<VPSalesInput> {
                         )),
                   ),
                   Container(
-                    height: 60,
+                    height: 70,
                     padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                     decoration: BoxDecoration(
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(6)),
                     child: TextFormField(
+                      controller: qtyController,
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly,
                       ],
+                      onEditingComplete: () {},
                       maxLines: 5,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -272,6 +306,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(6)),
                     child: TextFormField(
+                      controller: bonusAddController,
                       maxLines: 5,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -289,6 +324,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
                       style: TextStyle(fontSize: 14.0),
                     ),
                   ),
+
                   SizedBox(
                     height: 20.0,
                   ),
@@ -313,7 +349,42 @@ class _VPSalesInputState extends State<VPSalesInput> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        if (!chooseProduct.contains("Choose Product")) {}
+                        if (!chooseProduct.contains("Choose Product")) {
+                          String tipeBayar = "";
+                          String textBayar = "";
+
+                          if (kreditValue == false && tunaiValue == false) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                duration: const Duration(seconds: 4),
+                                content: Text("Please Input Type Payment")));
+                          } else {
+                            if (kreditValue == true) {
+                              tipeBayar = "10";
+                              textBayar = "kredit";
+                            } else if (tunaiValue == true) {
+                              tipeBayar = "20";
+                              textBayar = "Cash";
+                            }
+                            showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    BlocProvider<SalesinputblocBloc>(
+                                      create: (context) => SalesinputblocBloc(),
+                                      child: VPSalesInputConfirmDialog(
+                                        bonus: bonus,
+                                        bonusAdded: bonusAddController.text,
+                                        discount: discount,
+                                        product: chooseProduct,
+                                        qty: qtyController.text,
+                                        total: total,
+                                        tipeBayar: tipeBayar,
+                                        visitPlanId: model.idVisitPlan,
+                                        id: idProduct,
+                                        textBayar: textBayar,
+                                      ),
+                                    ));
+                          }
+                        }
                       }
                     },
                   ),

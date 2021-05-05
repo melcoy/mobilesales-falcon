@@ -2,19 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanAdd/bloc/visitplanaddbloc_bloc.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanPending/bloc/visitplanpendingbloc_bloc.dart';
+import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class VPPending extends StatefulWidget {
+  final CheckInDto model;
+  const VPPending({Key key, this.model}) : super(key: key);
   @override
-  _VPPendingState createState() => _VPPendingState();
+  _VPPendingState createState() => _VPPendingState(model);
 }
 
 class _VPPendingState extends State<VPPending> {
+  CheckInDto model;
+  _VPPendingState(this.model);
+
   bool value = false;
   bool tunaiValue = false;
   bool kreditValue = false;
   String val;
   String selectedReason;
+  bool checkSelectedStatusVP = false;
+  bool checkSelectedReason = false;
   String selectedStatusVP;
   TextEditingController additionalController = new TextEditingController();
 
@@ -58,6 +66,12 @@ class _VPPendingState extends State<VPPending> {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   duration: const Duration(seconds: 4),
                   content: Text(state.errMsg)));
+            }
+            if (state is VisitplanpendingblocSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  duration: const Duration(seconds: 4),
+                  content: Text(state.succMsg)));
+              Navigator.pop(context);
             }
           },
           child:
@@ -113,7 +127,9 @@ class _VPPendingState extends State<VPPending> {
                                 onChanged: (String newValue) {
                                   setState(() {
                                     selectedStatusVP = newValue;
-                                    print(selectedStatusVP);
+                                    if (selectedStatusVP != null) {
+                                      checkSelectedStatusVP = true;
+                                    }
                                   });
                                 },
                                 items: state.listStatusPending.map((valueItem) {
@@ -162,6 +178,9 @@ class _VPPendingState extends State<VPPending> {
                                 onChanged: (String newValue) {
                                   setState(() {
                                     selectedReason = newValue;
+                                    if (selectedReason != null) {
+                                      checkSelectedReason = true;
+                                    }
                                   });
                                 },
                                 items: state.listReason.map((valueItem) {
@@ -216,40 +235,50 @@ class _VPPendingState extends State<VPPending> {
                           SizedBox(
                             height: 20.0,
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: colorRedFigma,
-                              onPrimary: Colors.white,
-                              minimumSize:
-                                  Size(MediaQuery.of(context).size.width, 50),
-                              shape: const BeveledRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5))),
-                            ),
-                            child: Container(
-                              height: 50.0,
-                              child: Center(
-                                child: Text(
-                                  "Save Reason",
-                                  style: TextStyle(
-                                    fontSize: 18.0,
+                          if (state is VisitplanpendingblocLoading)
+                            Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          else
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: colorRedFigma,
+                                onPrimary: Colors.white,
+                                minimumSize:
+                                    Size(MediaQuery.of(context).size.width, 50),
+                                shape: const BeveledRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5))),
+                              ),
+                              child: Container(
+                                height: 50.0,
+                                child: Center(
+                                  child: Text(
+                                    "Save Reason",
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                    ),
                                   ),
                                 ),
                               ),
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  if (checkSelectedReason != false &&
+                                      checkSelectedStatusVP != false) {
+                                    print("Masuk");
+                                  }
+                                  BlocProvider.of<VisitplanpendingblocBloc>(
+                                          context)
+                                      .add(
+                                    VisitplanpendingblocEventSavePressed(
+                                        idPendingReason: selectedReason,
+                                        idStatusVP: selectedStatusVP,
+                                        pendingNote: additionalController.text,
+                                        idVisitPlan: model.idVisitPlan),
+                                  );
+                                }
+                              },
                             ),
-                            onPressed: () {
-                              if (_formKey.currentState.validate()) {
-                                BlocProvider.of<VisitplanpendingblocBloc>(
-                                        context)
-                                    .add(
-                                  VisitplanpendingblocEventSavePressed(
-                                      idPendingReason: selectedReason,
-                                      idStatusVP: selectedStatusVP,
-                                      pendingNote: additionalController.text),
-                                );
-                              }
-                            },
-                          ),
                         ],
                       ),
                     ),
