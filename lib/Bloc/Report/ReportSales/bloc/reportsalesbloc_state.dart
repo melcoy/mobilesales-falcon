@@ -15,6 +15,7 @@ class ReportsalesblocFailure extends ReportsalesblocState {
 
 class ReportsalesblocLoaded extends ReportsalesblocState {
   final List<ReportSalesModel> reportsalesModel;
+  final List<ReportTotalSalesModel> reporttotalsalesModel;
 
-  ReportsalesblocLoaded(this.reportsalesModel);
+  ReportsalesblocLoaded(this.reportsalesModel, this.reporttotalsalesModel);
 }
