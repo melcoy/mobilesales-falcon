@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/Report/ReportSales/bloc/reportsalesbloc_bloc.dart';
 import 'package:salesappmobile/Model/Report/ReportSalesModel.dart';
+import 'package:salesappmobile/Model/Report/ReportTotalSalesModel.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class ReportSales extends StatefulWidget {
@@ -9,6 +10,7 @@ class ReportSales extends StatefulWidget {
   _ReportSalesState createState() => _ReportSalesState();
 }
 
+List<ReportTotalSalesModel> _reportTotalSaleModel = [];
 List<ReportSalesModel> _reportSaleModel = [];
   double x = double.parse(_reportSaleModel.first.kunjunganAktual) *100 /double.parse(_reportSaleModel.first.targetKunjungan);
   String value = x.toStringAsFixed(2).toString();
@@ -52,7 +54,7 @@ class _ReportSalesState extends State<ReportSales> {
                 return Padding(
                   padding: const EdgeInsets.all(50.0),
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: Container(),
                   ),
                 );
               } else if (state is ReportsalesblocLoaded) {
@@ -248,7 +250,7 @@ class _ReportSalesState extends State<ReportSales> {
                 return Center(
                   child: Padding(
                     padding: const EdgeInsets.all(50.0),
-                    child: CircularProgressIndicator(),
+                    child: Container(),
                   ),
                 );
               }
@@ -269,10 +271,13 @@ class HeaderReport extends StatelessWidget {
             builder: (context, state) {
           if (state is ReportsalesblocLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Container(),
             );
           } else if (state is ReportsalesblocLoaded) {
             _reportSaleModel = state.reportsalesModel;
+            _reportTotalSaleModel = state.reporttotalsalesModel;
+            // print('totalPenjualan');
+            // print(_reportTotalSaleModel[0].totalPenjualan);
             return Container(
               height: 300,
               child: Stack(
@@ -288,6 +293,7 @@ class HeaderReport extends StatelessWidget {
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          
                           children: <Widget>[
                             Text(
                               "Total Sale",
@@ -299,7 +305,7 @@ class HeaderReport extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "Rp.100.000.000",
+                              'Rp.'+_reportTotalSaleModel[0].totalPenjualanLocale,
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
@@ -403,7 +409,12 @@ class HeaderReport extends StatelessWidget {
               ),
             );
           } else {
-            return Container();
+            return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(50.0),
+                    child: Container(),
+                  ),
+                );
           }
         })
       ],
