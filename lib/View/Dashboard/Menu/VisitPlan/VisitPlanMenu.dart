@@ -79,17 +79,6 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          // Container(
-          //     height: 30,
-          //     margin: EdgeInsets.only(top: 10),
-          //     child: Padding(
-          //       padding: const EdgeInsets.only(left: 10),
-          //       child: Text(
-          //         "Search: ",
-          //         style: Theme.of(context).textTheme.headline6.copyWith(
-          //             color: Colors.black, fontWeight: FontWeight.bold),
-          //       ),
-          //     )),
           Row(
             children: [
               // Container(
@@ -220,7 +209,11 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                               ),
                             ),
                             subtitle: Text(
-                              state.listVisitPlanModel[index].venue +
+                              "Status Visit Plan: " +
+                                  "${state.listVisitPlanModel[index].checkin.contains("10") ? "Undone" : "Done | "}" +
+                                  "Adress: " +
+                                  state.listVisitPlanModel[index].venue +
+                                  " | " +
                                   " Tanggal: " +
                                   state.listVisitPlanModel[index].tanggal
                                       .toString(),

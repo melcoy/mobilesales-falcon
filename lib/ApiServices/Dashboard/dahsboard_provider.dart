@@ -11,8 +11,8 @@ class DashboardProvider {
     final queryParameters = {
       'id': id,
       'session': session,
-      'start': "2021-03-16 00:00:00",
-      'end': "2021-04-16 12:00:00"
+      'start': dateStart,
+      'end': dateEnd
     };
 
     final uri = Uri.http(host, '/api/ver1/salesman/kpi/', queryParameters);

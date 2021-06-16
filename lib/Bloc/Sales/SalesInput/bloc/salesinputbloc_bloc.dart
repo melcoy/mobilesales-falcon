@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:salesappmobile/ApiServices/Sales/sales_repo.dart';
 import 'package:salesappmobile/ApiServices/Spesification/spesification_repo.dart';
+import 'package:salesappmobile/ApiServices/VisitPlan/visitplan_repo.dart';
 import 'package:salesappmobile/Model/Sales/Dto/SalesInputSavedDto.dart';
 import 'package:salesappmobile/Model/spesification/ListAllTruckModel.dart';
 import 'package:salesappmobile/Util/Connection.dart';
@@ -18,6 +19,7 @@ class SalesinputblocBloc
   final Connection checkConnection = Connection();
   final SpesificationRepo _spesificationRepo = SpesificationRepo();
   final SalesRepo _salesRepo = SalesRepo();
+  final VisitPlanRepo _visitPlanRepo = VisitPlanRepo();
   @override
   Stream<SalesinputblocState> mapEventToState(
     SalesinputblocEvent event,
@@ -63,8 +65,10 @@ class SalesinputblocBloc
       if (event is SaleSalesinputblocEventSaved) {
         yield SalesinputblocLoading();
         bool saved = await _salesRepo.fetchSales(event.model);
+        bool savedVP = await _visitPlanRepo.fetchUpdateStatusVisitPlan(
+            "5", event.model.visitplan);
 
-        if (saved == false) {
+        if (saved == false && savedVP == false) {
           yield SalesinputblocFailure(
               errMsg: "Sales Input Failed, Please Try Again Later");
         } else {

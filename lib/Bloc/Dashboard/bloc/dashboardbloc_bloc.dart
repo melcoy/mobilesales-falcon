@@ -27,7 +27,7 @@ class DashboardblocBloc extends Bloc<DashboardblocEvent, DashboardblocState> {
       yield DashboardblocLoading();
       model = await _dashboardRepo.fetchDashboardData(
           "${timeFormatPlus(0)} 00:00:00", "${timeFormatPlus(1)} 23:59:59");
-      print("Model" + model.targetPencapaianLocale.toString());
+
       if (model != null) {
         yield DashboardblocSuccess(model);
       } else {

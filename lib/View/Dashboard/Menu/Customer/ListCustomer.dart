@@ -116,7 +116,6 @@ class _ListCustomerState extends State<ListCustomer> {
                         BlocProvider.of<ListcustomerblocBloc>(context).add(
                             ListcustomerblocEventSearch(
                                 searchText: editingController.text));
-                        print(editingController.text);
                       })),
               Container(
                   child: TextButton(
@@ -231,7 +230,9 @@ class _ListCustomerState extends State<ListCustomer> {
                 );
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Container(
+                    child: Text("No Data"),
+                  ),
                 );
               }
             },

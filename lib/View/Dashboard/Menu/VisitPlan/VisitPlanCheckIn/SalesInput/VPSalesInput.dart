@@ -65,7 +65,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
           }
         });
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -359,12 +359,13 @@ class _VPSalesInputState extends State<VPSalesInput> {
                                 content: Text("Please Input Type Payment")));
                           } else {
                             if (kreditValue == true) {
-                              tipeBayar = "10";
+                              tipeBayar = "20";
                               textBayar = "kredit";
                             } else if (tunaiValue == true) {
-                              tipeBayar = "20";
+                              tipeBayar = "10";
                               textBayar = "Cash";
                             }
+                            print(tipeBayar);
                             showDialog(
                                 context: context,
                                 builder: (context) =>

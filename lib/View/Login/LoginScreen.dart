@@ -137,8 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (_formKey.currentState.validate()) {
                                   BlocProvider.of<LoginblocBloc>(context).add(
                                     LoginButtonPressed(
-                                        email: "sinarmaslog01@gmail.com",
-                                        password: "sinarmas"),
+                                        email: emailController.text,
+                                        password: passwordController.text),
                                   );
                                 }
                               },
