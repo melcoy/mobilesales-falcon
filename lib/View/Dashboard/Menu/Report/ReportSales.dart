@@ -12,8 +12,10 @@ class ReportSales extends StatefulWidget {
 
 List<ReportTotalSalesModel> _reportTotalSaleModel = [];
 List<ReportSalesModel> _reportSaleModel = [];
-  double x = double.parse(_reportSaleModel.first.kunjunganAktual) *100 /double.parse(_reportSaleModel.first.targetKunjungan);
-  String value = x.toStringAsFixed(2).toString();
+double x = double.parse(_reportSaleModel.first.kunjunganAktual) *
+    100 /
+    double.parse(_reportSaleModel.first.targetKunjungan);
+String value = x.toStringAsFixed(2).toString();
 
 class _ReportSalesState extends State<ReportSales> {
   DateTime pickedDate;
@@ -54,7 +56,7 @@ class _ReportSalesState extends State<ReportSales> {
                 return Padding(
                   padding: const EdgeInsets.all(50.0),
                   child: Center(
-                    child: Container(),
+                    child: CircularProgressIndicator(),
                   ),
                 );
               } else if (state is ReportsalesblocLoaded) {
@@ -271,7 +273,7 @@ class HeaderReport extends StatelessWidget {
             builder: (context, state) {
           if (state is ReportsalesblocLoading) {
             return Center(
-              child: Container(),
+              child: CircularProgressIndicator(),
             );
           } else if (state is ReportsalesblocLoaded) {
             _reportSaleModel = state.reportsalesModel;
@@ -293,7 +295,6 @@ class HeaderReport extends StatelessWidget {
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          
                           children: <Widget>[
                             Text(
                               "Total Sale",
@@ -305,7 +306,8 @@ class HeaderReport extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              'Rp.'+_reportTotalSaleModel[0].totalPenjualanLocale,
+                              'Rp.' +
+                                  _reportTotalSaleModel[0].totalPenjualanLocale,
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
@@ -410,11 +412,11 @@ class HeaderReport extends StatelessWidget {
             );
           } else {
             return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(50.0),
-                    child: Container(),
-                  ),
-                );
+              child: Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: Container(),
+              ),
+            );
           }
         })
       ],

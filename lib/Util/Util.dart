@@ -55,6 +55,12 @@ String dateFormat() {
   return formatted;
 }
 
+String timeFormat(DateTime now) {
+  var newDate = new DateTime(now.year, now.month, now.day);
+  String currentDate = new DateFormat('y-MM-dd hh:mm:ss').format(newDate);
+  return currentDate.toString();
+}
+
 String timeFormatPlus(int month) {
   DateTime now = new DateTime.now();
   var newDate = new DateTime(now.year, now.month + month, now.day);
