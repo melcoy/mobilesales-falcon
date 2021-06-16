@@ -58,6 +58,7 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
                               ),
                               if (state is DashboardblocSuccess)
                                 Text(
+                                  "Rp. "+
                                   state.model.salesLocale,
                                   style: Theme.of(context)
                                       .textTheme

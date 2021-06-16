@@ -8,4 +8,7 @@ class ReportRepo {
   Future<List<ReportSalesModel>> fetchReportSales(
           String dateStart, String dateEnd) =>
       _reportProvider.getReportSales(dateStart, dateEnd);
+
+  Future<List<ReportTotalSalesModel>> fetchTotalReportSales() =>
+      _reportProvider.getTotalReportSales();
 }

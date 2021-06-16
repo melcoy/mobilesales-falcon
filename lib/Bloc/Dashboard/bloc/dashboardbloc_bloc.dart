@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:salesappmobile/ApiServices/Dashboard/dashboard_repo.dart';
 import 'package:salesappmobile/Model/Dashboard/DashboardModel.dart';
+import 'package:salesappmobile/Model/Dashboard/DashboardTotalSalesModel.dart';
 import 'package:salesappmobile/Util/Connection.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
@@ -27,7 +28,6 @@ class DashboardblocBloc extends Bloc<DashboardblocEvent, DashboardblocState> {
       yield DashboardblocLoading();
       model = await _dashboardRepo.fetchDashboardData(
           "${timeFormatPlus(0)} 00:00:00", "${timeFormatPlus(1)} 23:59:59");
-
       if (model != null) {
         yield DashboardblocSuccess(model);
       } else {

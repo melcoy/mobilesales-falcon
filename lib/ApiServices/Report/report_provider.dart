@@ -21,11 +21,15 @@ class ReportProvider {
     try {
       http.Response response = await http.get(uri, headers: {"apikey": apikey});
       var decode = json.decode(response.body);
+      
       if (response.statusCode == 200) {
+        print(decode);
         List<dynamic> listJsonReport = (decode as Map<String, dynamic>)['data'];
         for (int i = 0; i < listJsonReport.length; i++) {
           listReport.add(ReportSalesModel.fromJson(listJsonReport[i]));
         }
+        print('listReport = ');
+        print(listReport[0].salesLocale);
       } else {
         return listReport;
       }
