@@ -36,17 +36,17 @@ class ListCustomerModel {
       ListCustomerModel(
         id: json["id"],
         alamat: json["alamat"].toString(),
-        name: json["name"],
-        kodepos: json["kodepos"],
-        email: json["email"],
-        hp: json["hp"],
-        sex: json["sex"],
-        kelurahan: json["kelurahan"],
-        provinsi: json["provinsi"],
-        kecamatan: json["kecamatan"],
-        photo: json["photo"],
-        kota: json["kota"],
-        dm: json["dm"],
+        name: json["name"].toString(),
+        kodepos: json["kodepos"].toString(),
+        email: json["email"].toString(),
+        hp: json["hp"].toString(),
+        sex: json["sex"].toString(),
+        kelurahan: json["kelurahan"].toString(),
+        provinsi: json["provinsi"].toString(),
+        kecamatan: json["kecamatan"].toString(),
+        photo: json["photo"].toString(),
+        kota: json["kota"].toString(),
+        dm: json["dm"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

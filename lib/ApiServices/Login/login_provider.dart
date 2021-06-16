@@ -15,6 +15,7 @@ class ApiLoginProvider {
           body: body, headers: {"apikey": apikey});
       var decode = json.decode(response.body);
       if (response.statusCode == 200) {
+        print(decode['data'][0]);
         return UserLogin.loginUser(decode['data'][0]);
       } else {
         return UserLogin.withError(response.statusCode.toString());

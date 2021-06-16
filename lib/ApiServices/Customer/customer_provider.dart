@@ -27,7 +27,7 @@ class CustomerProvider {
         //print(listJsonCustomer.length);
         for (int i = 0; i < listJsonCustomer.length; i++) {
           listCustomer.add(ListCustomerModel.createList(listJsonCustomer[i]));
-          //print(listJsonCustomer[i]);
+          print(listCustomer[i]);
         }
 
         return listCustomer;
@@ -54,6 +54,8 @@ class CustomerProvider {
     //     kota: "187",
     //     provinsi: "97",
     //     sex: "P");
+
+    print("Model Customer :" + model.kota);
     final queryParameters = {
       'id': id,
       'session': session,

@@ -5,16 +5,15 @@ import 'package:salesappmobile/Model/Report/ReportTotalSalesModel.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class ReportProvider {
-  Future<List<ReportSalesModel>> getReportSales() async {
-    String start = await timeFormatOneMonth(DateTime.now().month)+' 00:00:00';
-    String end = await timeFormat(DateTime.now())+' 23:59:59';
+  Future<List<ReportSalesModel>> getReportSales(
+      String dateStart, String dateEnd) async {
     String session = await getSession();
     String id = await getIdUser();
     final queryParameters = {
       'id': id,
       'session': session,
-      'start': start,
-      'end': end,
+      'start': dateStart,
+      'end': dateEnd
     };
     final uri = Uri.http(host, '/api/ver1/salesman/kpi/', queryParameters);
 

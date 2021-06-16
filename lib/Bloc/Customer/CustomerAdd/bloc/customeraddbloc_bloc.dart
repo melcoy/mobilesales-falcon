@@ -17,30 +17,30 @@ class CustomeraddblocBloc
     extends Bloc<CustomeraddblocEvent, CustomeraddblocState> {
   CustomeraddblocBloc() : super(CustomeraddblocInitial());
   CustomerRepo _customerRepo = CustomerRepo();
-  MasterRepo _masterRepo = MasterRepo();
+  // MasterRepo _masterRepo = MasterRepo();
   final Connection checkConnection = Connection();
 
   @override
   Stream<CustomeraddblocState> mapEventToState(
     CustomeraddblocEvent event,
   ) async* {
-    if (event is CustomeraddblocEventStart) {
-      yield CustomeraddblocMasterLoading();
-      bool connect = await checkConnection.initConnectivity();
-      if (connect == false) {
-        yield CustomeraddblocFailure(errorMsg: noInternet);
-      } else {
-        List<dynamic> listKota = await _masterRepo.fetchListKota();
-        List<dynamic> listProvinsi = await _masterRepo.fetchListProv();
-        if (listKota.isEmpty && listProvinsi.isEmpty) {
-          yield CustomeraddblocMasterFailure(errorMsg: "Error Kota, Provinsi");
-          return;
-        } else {
-          yield CustomeraddblocMasterLoaded(
-              kotaModel: listKota, provinsiModel: listProvinsi);
-        }
-      }
-    }
+    // if (event is CustomeraddblocEventStart) {
+    //   yield CustomeraddblocMasterLoading();
+    //   bool connect = await checkConnection.initConnectivity();
+    //   if (connect == false) {
+    //     yield CustomeraddblocFailure(errorMsg: noInternet);
+    //   } else {
+    //     List<dynamic> listKota = await _masterRepo.fetchListKota();
+    //     List<dynamic> listProvinsi = await _masterRepo.fetchListProv();
+    //     if (listKota.isEmpty && listProvinsi.isEmpty) {
+    //       yield CustomeraddblocMasterFailure(errorMsg: "Error Kota, Provinsi");
+    //       return;
+    //     } else {
+    //       yield CustomeraddblocMasterLoaded(
+    //           kotaModel: listKota, provinsiModel: listProvinsi);
+    //     }
+    //   }
+    // }
 
     if (event is CustomeraddblocEventSave) {
       bool connect = await checkConnection.initConnectivity();
@@ -58,12 +58,12 @@ class CustomeraddblocBloc
             name: event.model.name,
             alamat: event.model.alamat,
             decisionmaker: "1",
-            email: "Udin@Ugg",
-            hp: "0000000",
-            kecamatan: "Bojong",
-            kelurahan: "Bojong",
-            kodepos: "4444",
-            kota: event.model.provinsi,
+            email: "",
+            hp: "",
+            kecamatan: "",
+            kelurahan: "",
+            kodepos: "",
+            kota: event.model.kota,
             provinsi: event.model.provinsi,
             sex: sex);
 

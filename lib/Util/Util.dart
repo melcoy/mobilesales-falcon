@@ -64,7 +64,7 @@ String timeFormat(DateTime now) {
 String timeFormatPlus(int month) {
   DateTime now = new DateTime.now();
   var newDate = new DateTime(now.year, now.month + month, now.day);
-  String currentDate = new DateFormat('y-MM-dd kk:mm:ss').format(newDate);
+  String currentDate = new DateFormat('y-MM-dd').format(newDate);
   // var parsedDate = DateTime.parse(currentDate);
   // var formatter = new DateFormat('kk:mm');
   // String formatted = formatter.format(parsedDate);
