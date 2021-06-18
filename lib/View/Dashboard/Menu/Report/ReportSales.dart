@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/Report/ReportSales/bloc/reportsalesbloc_bloc.dart';
 import 'package:salesappmobile/Model/Report/ReportSalesModel.dart';
 import 'package:salesappmobile/Model/Report/ReportTotalSalesModel.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class ReportSales extends StatefulWidget {
@@ -62,53 +63,64 @@ class _ReportSalesState extends State<ReportSales> {
               } else if (state is ReportsalesblocLoaded) {
                 _reportSaleModel = state.reportsalesModel;
                 return Container(
-                    margin: EdgeInsets.only(top: 20, left: 20, right: 0),
+                    margin: EdgeInsets.only(
+                        top: SizeConfig.blockVertical * 2,
+                        left: SizeConfig.blockHorizontal * 5,
+                        right: SizeConfig.blockVertical * 0),
                     child: Row(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                height: 40,
-                                child: Text(
-                                  "Goal",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1
-                                      .copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                )),
-                            Container(
-                              height: 40,
-                              child: Text(
-                                "Visit this Month",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              child: Text(
-                                "Target Value",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        Flexible(
+                          fit: FlexFit.tight,
                           child: Container(
-                            width: 50,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    height: 40,
+                                    child: Text(
+                                      "Goal",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          .copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                    )),
+                                Container(
+                                  height: 40,
+                                  child: Text(
+                                    "Visit this Month",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(
+                                            color: Colors.black38,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Container(
+                                  height: 40,
+                                  child: Text(
+                                    "Target Value",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(
+                                            color: Colors.black38,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: Container(
+                            width: SizeConfig.blockVertical * 10,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -152,10 +164,9 @@ class _ReportSalesState extends State<ReportSales> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        Flexible(
+                          fit: FlexFit.tight,
                           child: Container(
-                            width: 50,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -199,10 +210,9 @@ class _ReportSalesState extends State<ReportSales> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        Flexible(
+                          fit: FlexFit.tight,
                           child: Container(
-                            width: 70,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -267,6 +277,7 @@ class _ReportSalesState extends State<ReportSales> {
 class HeaderReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Column(
       children: <Widget>[
         BlocBuilder<ReportsalesblocBloc, ReportsalesblocState>(
@@ -281,11 +292,11 @@ class HeaderReport extends StatelessWidget {
             // print('totalPenjualan');
             // print(_reportTotalSaleModel[0].totalPenjualan);
             return Container(
-              height: 300,
+              height: SizeConfig.blockVertical * 30,
               child: Stack(
                 children: <Widget>[
                   Container(
-                    height: 150,
+                    height: SizeConfig.blockVertical * 20,
                     decoration: BoxDecoration(
                         color: colorRedFigma,
                         borderRadius: BorderRadius.only(
@@ -323,11 +334,11 @@ class HeaderReport extends StatelessWidget {
                   Positioned(
                       left: 0,
                       right: 0,
-                      top: 120,
+                      top: SizeConfig.blockVertical * 17,
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(SizeConfig.blockVertical * 3.5),
                         margin: EdgeInsets.symmetric(horizontal: 20.0),
-                        height: 100,
+                        height: SizeConfig.blockVertical * 12,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
@@ -341,8 +352,8 @@ class HeaderReport extends StatelessWidget {
                         ),
                         child: Row(
                           children: <Widget>[
-                            Expanded(
-                              flex: 2,
+                            Flexible(
+                              fit: FlexFit.tight,
                               child: Column(
                                 children: <Widget>[
                                   Text(
@@ -352,7 +363,12 @@ class HeaderReport extends StatelessWidget {
                                         .headline5
                                         .copyWith(
                                             color: Colors.black,
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                SizeConfig.blockVertical * 2),
+                                  ),
+                                  SizedBox(
+                                    height: 3,
                                   ),
                                   Text(
                                     'Rp. ' +
@@ -363,17 +379,19 @@ class HeaderReport extends StatelessWidget {
                                         .bodyText1
                                         .copyWith(
                                             color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                  )
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                SizeConfig.blockVertical * 1.3),
+                                  ),
                                 ],
                               ),
                             ),
                             VerticalDivider(
                               color: Colors.red,
-                              width: 20,
+                              width: 5,
                             ),
-                            Expanded(
-                              flex: 2,
+                            Flexible(
+                              fit: FlexFit.tight,
                               child: Container(
                                 child: Column(
                                   children: <Widget>[
@@ -385,19 +403,26 @@ class HeaderReport extends StatelessWidget {
                                             .headline5
                                             .copyWith(
                                                 color: Colors.black,
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    SizeConfig.blockVertical *
+                                                        2),
                                       ),
                                     ),
                                     Center(
                                       child: Text(
                                         'Rp. ' +
-                                            _reportSaleModel[0].salesLocale,
+                                            _reportSaleModel[0].salesLocale +
+                                            "0000000",
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1
                                             .copyWith(
                                                 color: Colors.black,
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    SizeConfig.blockVertical *
+                                                        1.5),
                                       ),
                                     ),
                                   ],

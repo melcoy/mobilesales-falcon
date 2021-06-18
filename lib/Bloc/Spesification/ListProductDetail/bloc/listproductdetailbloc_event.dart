@@ -4,7 +4,6 @@ part of 'listproductdetailbloc_bloc.dart';
 abstract class ListproductdetailblocEvent {}
 
 class ListproductdetailblocEventStarted extends ListproductdetailblocEvent {
-  String id;
+  final String id;
   ListproductdetailblocEventStarted({this.id});
-
 }

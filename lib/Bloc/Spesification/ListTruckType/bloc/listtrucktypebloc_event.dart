@@ -4,7 +4,6 @@ part of 'listtrucktypebloc_bloc.dart';
 abstract class ListtrucktypeblocEvent {}
 
 class ListtrucktypeblocEventStarted extends ListtrucktypeblocEvent {
-  String id;
+  final String id;
   ListtrucktypeblocEventStarted({this.id});
-
 }

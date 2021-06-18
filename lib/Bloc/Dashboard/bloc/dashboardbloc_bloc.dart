@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:salesappmobile/ApiServices/Dashboard/dashboard_repo.dart';
 import 'package:salesappmobile/Model/Dashboard/DashboardModel.dart';
-import 'package:salesappmobile/Model/Dashboard/DashboardTotalSalesModel.dart';
+
 import 'package:salesappmobile/Util/Connection.dart';
 import 'package:salesappmobile/Util/Util.dart';
 

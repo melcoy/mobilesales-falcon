@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class MenuDashboard extends StatelessWidget {
@@ -55,12 +56,13 @@ class MyMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       child: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.all(15),
-            width: 100,
+            margin: EdgeInsets.all(SizeConfig.blockVertical * 1.5),
+            width: SizeConfig.blockHorizontal * 25,
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
@@ -71,10 +73,10 @@ class MyMenu extends StatelessWidget {
                 },
                 child: Center(
                   child: Container(
-                    height: 95,
+                    height: SizeConfig.blockVertical * 11,
                     child: Icon(
                       icon,
-                      size: 40.0,
+                      size: SizeConfig.blockVertical * 7,
                       color: Colors.white,
                     ),
                   ),
@@ -84,10 +86,11 @@ class MyMenu extends StatelessWidget {
           ),
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: colorRedFigma, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  color: colorRedFigma,
+                  fontWeight: FontWeight.bold,
+                  fontSize: SizeConfig.blockVertical * 1.8,
+                ),
           )
         ],
       ),

@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 const colorRedFigma = const Color(0xffEB5757);
@@ -33,7 +35,7 @@ void deleteSession() async {
 
 Future<String> getSession() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
-  return pref.getString("session") ?? "Session Expired";
+  return pref.getString("session") ?? null;
 }
 
 Future<String> getIdPusat() async {

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:salesappmobile/Util/Util.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Customer/ListCustomer.dart';
 
 class CustomerDetail extends StatelessWidget {
-  String name, decision, address, provinsi, kecamatan, kelurahan, kota, kodepos;
+  final String name,
+      decision,
+      address,
+      provinsi,
+      kecamatan,
+      kelurahan,
+      kota,
+      kodepos;
 
   CustomerDetail(
       {this.name,

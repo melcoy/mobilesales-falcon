@@ -4,7 +4,6 @@ part of 'listsubtypebloc_bloc.dart';
 abstract class ListsubtypeblocEvent {}
 
 class ListsubtypeblocEventStarted extends ListsubtypeblocEvent {
-  String id;
+  final String id;
   ListsubtypeblocEventStarted({this.id});
-
 }
