@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/Sales/SalesInput/bloc/salesinputbloc_bloc.dart';
 import 'package:salesappmobile/Model/spesification/Dto/ListAllTruckDTO.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class VPSalesInputTruckDialog extends StatefulWidget {
@@ -21,15 +22,18 @@ class _DialogCheckInState extends State<VPSalesInputTruckDialog> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
+    SizeConfig().init(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(top: 10, bottom: 16, left: 16, right: 16),
+          padding: EdgeInsets.only(
+              top: SizeConfig.blockVertical * 5,
+              bottom: SizeConfig.blockVertical * 2,
+              left: SizeConfig.blockHorizontal * 2,
+              right: SizeConfig.blockHorizontal * 2),
           margin: EdgeInsets.only(top: 16),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -46,7 +50,7 @@ class _DialogCheckInState extends State<VPSalesInputTruckDialog> {
               Text(
                 "Choose Product",
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: SizeConfig.blockVertical * 3,
                 ),
               ),
               Container(
@@ -56,15 +60,21 @@ class _DialogCheckInState extends State<VPSalesInputTruckDialog> {
                     child: Text(
                       "Search: ",
                       style: Theme.of(context).textTheme.headline6.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: SizeConfig.blockVertical * 3),
                     ),
                   )),
               Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
-                    height: 40,
-                    width: size.width * 0.4,
+                    margin: EdgeInsets.fromLTRB(
+                        SizeConfig.blockVertical * 2,
+                        SizeConfig.blockHorizontal * 2,
+                        SizeConfig.blockVertical * 0,
+                        SizeConfig.blockHorizontal * 2),
+                    height: SizeConfig.blockVertical * 6,
+                    width: SizeConfig.blockHorizontal * 40,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(),
@@ -82,29 +92,36 @@ class _DialogCheckInState extends State<VPSalesInputTruckDialog> {
                       ),
                     ),
                   ),
-                  Container(
-                      child: IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: colorRedFigma,
-                            size: 30,
-                          ),
-                          onPressed: () {
-                            BlocProvider.of<SalesinputblocBloc>(context).add(
-                                SaleSalesinputblocEventSearch(
-                                    searchProduct: editingController.text));
-                          })),
-                  Container(
-                      child: TextButton(
-                          child: Text(
-                            "All",
-                            style:
-                                TextStyle(color: colorRedFigma, fontSize: 15),
-                          ),
-                          onPressed: () {
-                            BlocProvider.of<SalesinputblocBloc>(context)
-                                .add(SaleSalesinputblocEventStarted());
-                          })),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: Container(
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: colorRedFigma,
+                              size: SizeConfig.blockVertical * 4,
+                            ),
+                            onPressed: () {
+                              BlocProvider.of<SalesinputblocBloc>(context).add(
+                                  SaleSalesinputblocEventSearch(
+                                      searchProduct: editingController.text));
+                            })),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: Container(
+                        child: TextButton(
+                            child: Text(
+                              "All",
+                              style: TextStyle(
+                                  color: colorRedFigma,
+                                  fontSize: SizeConfig.blockVertical * 2),
+                            ),
+                            onPressed: () {
+                              BlocProvider.of<SalesinputblocBloc>(context)
+                                  .add(SaleSalesinputblocEventStarted());
+                            })),
+                  ),
                 ],
               ),
               BlocBuilder<SalesinputblocBloc, SalesinputblocState>(
@@ -115,7 +132,8 @@ class _DialogCheckInState extends State<VPSalesInputTruckDialog> {
                   );
                 } else if (state is SalesinputblocLoaded) {
                   return Container(
-                    height: size.height - 250,
+                    color: colorRedFigma,
+                    height: SizeConfig.blockVertical * 60,
                     child: ListView.builder(
                       itemCount: state.listAllProduct.length,
                       itemBuilder: (context, index) {

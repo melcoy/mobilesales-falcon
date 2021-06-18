@@ -6,6 +6,7 @@ import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanCheckIn/bloc/visitplanche
 
 import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Util/CameraPageState.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
 
@@ -35,7 +36,8 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -133,14 +135,22 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
           ),
           ListTile(
             title: Text(
-                "Date Start : ${_pickedDateStart.year}-${_pickedDateStart.month}-${_pickedDateStart.day}"),
+                "Date Start : ${_pickedDateStart.year}-${_pickedDateStart.month}-${_pickedDateStart.day}",
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: SizeConfig.blockVertical * 2)),
             trailing: Icon(Icons.keyboard_arrow_down),
             onTap: _pickDateStart,
             // onTap: _pickTime,
           ),
           ListTile(
             title: Text(
-                "Date End : ${_pickedDateEnd.year}-${_pickedDateEnd.month}-${_pickedDateEnd.day}"),
+                "Date End : ${_pickedDateEnd.year}-${_pickedDateEnd.month}-${_pickedDateEnd.day}",
+                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: SizeConfig.blockVertical * 2)),
             trailing: Icon(Icons.keyboard_arrow_down),
             onTap: _pickDateEnd,
             // onTap: _pickTime,
@@ -183,8 +193,8 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is ListvisitplanLoaded) {
-              return Container(
-                height: size.height - 420,
+              return Flexible(
+                fit: FlexFit.tight,
                 child: ListView.builder(
                   itemCount: state.listVisitPlanModel.length,
                   itemBuilder: (_, index) {

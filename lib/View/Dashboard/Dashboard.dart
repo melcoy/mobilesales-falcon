@@ -1,32 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:salesappmobile/ApiServices/Spesification/spesification_repo.dart';
-import 'package:salesappmobile/ApiServices/VisitPlan/visitplan_repo.dart';
+
 import 'package:salesappmobile/Bloc/Dashboard/bloc/dashboardbloc_bloc.dart';
+import 'package:salesappmobile/Bloc/Login/bloc/loginbloc_bloc.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Header/HeaderDashboard.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/MenuDashboard.dart';
+import 'package:salesappmobile/View/Login/LoginScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   static const idScreen = "dashboard";
 
   @override
+  _DashboardState createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    super.initState();
+    checkIsLogin();
+  }
+
+  Future<Null> checkIsLogin() async {
+    String _token = "";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _token = prefs.getString("session");
+    if (_token != "" && _token != null) {
+      print("alreay login.");
+      //your home page is loaded
+    } else {
+      //replace it with the login page
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BlocProvider<LoginblocBloc>(
+                    create: (context) => LoginblocBloc(),
+                    child: LoginScreen(),
+                  )));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: colorRedFigma,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.refresh,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () async {},
+          Icon(
+            Icons.logout,
+            color: Colors.white,
+            size: 30,
           ),
+          TextButton(
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: SizeConfig.blockVertical * 2),
+              ),
+              onPressed: () {
+                deleteSession();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BlocProvider<LoginblocBloc>(
+                              create: (context) => LoginblocBloc(),
+                              child: LoginScreen(),
+                            )));
+              })
         ],
       ),
       body: SingleChildScrollView(

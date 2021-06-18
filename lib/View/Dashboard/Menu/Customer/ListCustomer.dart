@@ -4,6 +4,7 @@ import 'package:salesappmobile/Bloc/Customer/CustomerAdd/bloc/customeraddbloc_bl
 import 'package:salesappmobile/Bloc/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 
 import 'package:salesappmobile/Model/Customer/ListCustomerModel.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Customer/CustomerDetail.dart';
@@ -29,7 +30,7 @@ class _ListCustomerState extends State<ListCustomer> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -73,21 +74,27 @@ class _ListCustomerState extends State<ListCustomer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: SizeConfig.blockVertical * 1),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   "Search: ",
                   style: Theme.of(context).textTheme.headline6.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: SizeConfig.blockVertical * 3),
                 ),
               )),
           Row(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
-                height: 40,
-                width: size.width * 0.65,
+                margin: EdgeInsets.fromLTRB(
+                    SizeConfig.blockHorizontal * 3,
+                    SizeConfig.blockVertical * 1,
+                    SizeConfig.blockHorizontal * 2,
+                    SizeConfig.blockVertical * 1),
+                height: SizeConfig.blockVertical * 5,
+                width: SizeConfig.blockHorizontal * 60,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(),
@@ -138,8 +145,7 @@ class _ListCustomerState extends State<ListCustomer> {
               } else if (state is ListcustomerblocLoaded) {
                 _listCustomerModel = state.listCustomerModel;
 
-                return Container(
-                  height: size.height - 250,
+                return Flexible(
                   child: ListView.builder(
                     itemCount: _listCustomerModel.length,
                     itemBuilder: (context, index) {

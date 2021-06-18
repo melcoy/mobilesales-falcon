@@ -6,10 +6,11 @@ import 'package:salesappmobile/Bloc/Report/ReportSales/bloc/reportsalesbloc_bloc
 
 import 'package:salesappmobile/Bloc/Spesification/bloc/listspesificationbloc_bloc.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/ListVisitPlan/bloc/listvisitplanbloc_bloc.dart';
+import 'package:salesappmobile/View/Dashboard/Dashboard.dart';
 
 import 'package:salesappmobile/View/Dashboard/Menu/Report/ReportSales.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruck.dart';
-import 'package:salesappmobile/View/Dashboard/Menu/Spesification/ListTruckType.dart';
+
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanMenu.dart';
 import 'Bloc/Customer/ListCustomer/bloc/listcustomerbloc_bloc.dart';
 
@@ -26,8 +27,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.white),
-      initialRoute: LoginScreen.idScreen,
+      initialRoute: Dashboard.idScreen,
       routes: {
+        Dashboard.idScreen: (context) => BlocProvider<LoginblocBloc>(
+            create: (BuildContext context) => LoginblocBloc(),
+            child: Dashboard()),
         LoginScreen.idScreen: (context) => BlocProvider<LoginblocBloc>(
             create: (BuildContext context) => LoginblocBloc(),
             child: LoginScreen()),
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
         '/ReportSales': (context) => BlocProvider<ReportsalesblocBloc>(
               create: (BuildContext context) => ReportsalesblocBloc(),
               child: ReportSales(),
-        )
+            )
       },
     );
   }

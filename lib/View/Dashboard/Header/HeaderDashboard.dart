@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesappmobile/Bloc/Dashboard/bloc/dashboardbloc_bloc.dart';
+import 'package:salesappmobile/Util/SizeConfig.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class HeaderDashboard extends StatefulWidget {
@@ -19,6 +20,7 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BlocListener<DashboardblocBloc, DashboardblocState>(
       listener: (context, state) {
         if (state is DashboardblocFailure) {
@@ -32,11 +34,11 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
           return Column(
             children: <Widget>[
               Container(
-                height: 195,
+                height: SizeConfig.blockVertical * 30,
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      height: 110,
+                      height: SizeConfig.blockVertical * 20,
                       decoration: BoxDecoration(
                           color: colorRedFigma,
                           borderRadius: BorderRadius.only(
@@ -58,8 +60,7 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
                               ),
                               if (state is DashboardblocSuccess)
                                 Text(
-                                  "Rp. "+
-                                  state.model.salesLocale,
+                                  "Rp. " + state.model.salesLocale,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6
@@ -83,13 +84,18 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
                       ),
                     ),
                     Positioned(
-                        bottom: 0,
                         left: 0,
                         right: 0,
+                        top: SizeConfig.blockVertical * 17,
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: EdgeInsets.fromLTRB(
+                            SizeConfig.blockHorizontal * 2,
+                            SizeConfig.blockVertical * 2,
+                            SizeConfig.blockHorizontal * 2,
+                            SizeConfig.blockVertical * 2,
+                          ),
                           margin: EdgeInsets.symmetric(horizontal: 20.0),
-                          height: 100,
+                          height: SizeConfig.blockVertical * 11,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
@@ -103,8 +109,8 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
                           ),
                           child: Row(
                             children: <Widget>[
-                              Expanded(
-                                flex: 2,
+                              Flexible(
+                                fit: FlexFit.tight,
                                 child: Column(
                                   children: <Widget>[
                                     Text(
@@ -113,21 +119,29 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
                                           .textTheme
                                           .headline5
                                           .copyWith(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                SizeConfig.blockVertical * 2,
+                                          ),
                                     ),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     if (state is DashboardblocSuccess)
                                       Text(
-                                        state.model.targetPencapaianLocale,
+                                        "Rp " +
+                                            state.model.targetPencapaianLocale,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1
                                             .copyWith(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize:
+                                                  SizeConfig.blockVertical *
+                                                      1.5,
+                                            ),
                                       )
                                     else
                                       Text(
@@ -146,50 +160,51 @@ class _HeaderDashboardState extends State<HeaderDashboard> {
                                 color: Colors.red,
                                 width: 20,
                               ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Column(
-                                    children: <Widget>[
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      "Target Visit: ",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5
+                                          .copyWith(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                SizeConfig.blockVertical * 2,
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    if (state is DashboardblocSuccess)
+                                      Text(
+                                        state.model.targetKunjungan,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            .copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize:
+                                                  SizeConfig.blockVertical * 2,
+                                            ),
+                                      )
+                                    else
                                       Center(
                                         child: Text(
-                                          "Target Visit: ",
+                                          "Rp.100.000.000",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5
+                                              .bodyText1
                                               .copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      if (state is DashboardblocSuccess)
-                                        Text(
-                                          state.model.targetKunjungan,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                        )
-                                      else
-                                        Center(
-                                          child: Text(
-                                            "Rp.100.000.000",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1
-                                                .copyWith(
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
                               ),
                             ],
