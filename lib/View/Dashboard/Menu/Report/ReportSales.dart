@@ -412,8 +412,7 @@ class HeaderReport extends StatelessWidget {
                                     Center(
                                       child: Text(
                                         'Rp. ' +
-                                            _reportSaleModel[0].salesLocale +
-                                            "0000000",
+                                            _reportSaleModel[0].salesLocale,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1
