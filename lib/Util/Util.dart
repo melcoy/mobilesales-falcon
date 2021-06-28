@@ -73,6 +73,16 @@ String timeFormatPlus(int month) {
   return currentDate.toString();
 }
 
+String timeFormatReportSales(int month) {
+  DateTime now = new DateTime.now();
+  var newDate = new DateTime(now.year, now.month + month);
+  String currentDate = new DateFormat('y-MM').format(newDate);
+  // var parsedDate = DateTime.parse(currentDate);
+  // var formatter = new DateFormat('kk:mm');
+  // String formatted = formatter.format(parsedDate);
+  return currentDate.toString();
+}
+
 String timeFormatOneMonth(int month) {
   DateTime now = new DateTime.now();
   var newDate = new DateTime(now.year, now.month - 1, now.day);
