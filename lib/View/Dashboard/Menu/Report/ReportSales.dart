@@ -13,10 +13,8 @@ class ReportSales extends StatefulWidget {
 
 List<ReportTotalSalesModel> _reportTotalSaleModel = [];
 List<ReportSalesModel> _reportSaleModel = [];
-double x = double.parse(_reportSaleModel.first.kunjunganAktual) *
-    100 /
-    double.parse(_reportSaleModel.first.targetKunjungan);
-String value = x.toStringAsFixed(2).toString();
+// double x = double.parse(_reportSaleModel.first.kunjunganAktual) * 100 / double.parse(_reportSaleModel.first.targetKunjungan);
+// String value = (double.parse(_reportSaleModel.first.kunjunganAktual) * 100 / double.parse(_reportSaleModel.first.targetKunjungan)).toString();
 
 class _ReportSalesState extends State<ReportSales> {
   DateTime pickedDate;
@@ -230,15 +228,26 @@ class _ReportSalesState extends State<ReportSales> {
                                 ),
                                 Container(
                                   height: 40,
-                                  child: Text(
-                                    value + '%',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .copyWith(
-                                            color: Colors.black38,
-                                            fontWeight: FontWeight.bold),
-                                  ),
+                                  child: (double.parse(_reportSaleModel.first.kunjunganAktual) ==0 ||
+                                          double.parse(_reportSaleModel.first.targetKunjungan) ==0
+                                      ? Text(
+                                          '0%',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              .copyWith(
+                                                  color: Colors.black38,
+                                                  fontWeight: FontWeight.bold),
+                                        )
+                                      : Text(
+                                          '${(double.parse(_reportSaleModel.first.kunjunganAktual) * 100 / double.parse(_reportSaleModel.first.targetKunjungan)).toStringAsFixed(2)} %',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              .copyWith(
+                                                  color: Colors.black38,
+                                                  fontWeight: FontWeight.bold),
+                                        )),
                                 ),
                                 Container(
                                   height: 40,
@@ -368,7 +377,7 @@ class HeaderReport extends StatelessWidget {
                                                 SizeConfig.blockVertical * 2),
                                   ),
                                   SizedBox(
-                                    height: 3,
+                                    height: SizeConfig.blockVertical * 0.1,
                                   ),
                                   Text(
                                     'Rp. ' +
@@ -409,6 +418,9 @@ class HeaderReport extends StatelessWidget {
                                                         2),
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: SizeConfig.blockVertical * 0.1,
+                                    ),
                                     Center(
                                       child: Text(
                                         'Rp. ' +
@@ -421,7 +433,7 @@ class HeaderReport extends StatelessWidget {
                                                 fontWeight: FontWeight.bold,
                                                 fontSize:
                                                     SizeConfig.blockVertical *
-                                                        1.5),
+                                                        1.3),
                                       ),
                                     ),
                                   ],

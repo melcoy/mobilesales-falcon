@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:salesappmobile/Bloc/Sales/SalesInput/bloc/salesinputbloc_bloc.dart';
 import 'package:salesappmobile/Model/Sales/Dto/SalesInputSavedDto.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
+final formatCurrency = new NumberFormat.simpleCurrency(locale: 'id_ID');
 class VPSalesInputConfirmDialog extends StatelessWidget {
   double total = 0;
   String qty = "";
@@ -153,8 +155,10 @@ class VPSalesInputConfirmDialog extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      "Total Price : " +
-                          (total * double.parse(qty)).toStringAsFixed(0),
+                      // "Total Price : ${formatCurrency.format(double.tryParse((total * double.parse(qty)).toStringAsFixed(0)))}"
+                      "Total : ${formatCurrency.format(double.parse((total * double.parse(qty)).toStringAsFixed(0)))}"
+                      // "Total Price : ${(total * double.parse(qty)).toStringAsFixed(0)}" 
+                          ,
                       style: Theme.of(context).textTheme.headline6.copyWith(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     )),

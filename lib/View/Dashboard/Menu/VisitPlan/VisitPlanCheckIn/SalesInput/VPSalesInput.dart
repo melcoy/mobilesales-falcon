@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:salesappmobile/Bloc/Sales/SalesInput/bloc/salesinputbloc_bloc.dart';
 import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Model/spesification/Dto/ListAllTruckDTO.dart';
 import 'package:salesappmobile/Util/Util.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/SalesInput/VPSalesInputConfirmDialog.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/SalesInput/VPSalesInputTruckDialog.dart';
+
+final formatCurrency = new NumberFormat.simpleCurrency(locale: 'id_ID');
 
 class VPSalesInput extends StatefulWidget {
   final CheckInDto model;
@@ -27,6 +30,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
   bool kreditValue = false;
   bool plusAdd = false;
   double total = 0;
+  double qty = 1;
   String percent = "100.0";
   String val;
   String truckChoose;
@@ -202,7 +206,8 @@ class _VPSalesInputState extends State<VPSalesInput> {
                     child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          "Price : " + total.toStringAsFixed(0),
+                          // Rp. ${formatCurrency.format(double.parse((total * double.parse(qty)).toStringAsFixed(0)))}"
+                          "Price : ${formatCurrency.format(double.parse(total.toStringAsFixed(0)))}",
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               color: Colors.black, fontWeight: FontWeight.bold),
                         )),
@@ -258,35 +263,73 @@ class _VPSalesInputState extends State<VPSalesInput> {
                               color: Colors.black, fontWeight: FontWeight.bold),
                         )),
                   ),
-                  Container(
-                    height: 70,
-                    padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                    decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(6)),
-                    child: TextFormField(
-                      controller: qtyController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      onEditingComplete: () {},
-                      maxLines: 5,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Enter Qty';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          labelStyle: TextStyle(fontSize: 14.0),
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 10.0,
-                          )),
-                      style: TextStyle(fontSize: 14.0),
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            qty -= 1;
+                            print('qty min');
+                            print(qty * double.parse(total.toStringAsFixed(0)));
+                          });
+                        },
+                        icon: Icon(Icons.remove_circle_sharp),
+                        color: colorRedFigma,
+                      ),
+                      Container(
+                        width: 80,
+                        height: 40,
+                        padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                        // decoration: BoxDecoration(
+                        //     border: Border.all(),
+                        //     borderRadius: BorderRadius.circular(6)),
+                        // child: TextFormField(
+                        //   controller: qtyController,
+
+                        // qty.toStringAsFixed(0).toString(),
+                        //   style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        //       fontSize: 35,
+                        //       color: Colors.black,
+                        //       fontWeight: FontWeight.bold),
+                        // )),
+                        child: TextFormField(
+                          controller: qtyController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          onEditingComplete: () {},
+                          maxLines: 5,
+                          validator: (value) {
+                            if (qty.toStringAsFixed(0).toString() == null ||
+                                qty.toStringAsFixed(0).toString().isEmpty) {
+                              return 'Enter Qty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              labelText: qty.toStringAsFixed(0).toString(),
+                              labelStyle: TextStyle(fontSize: 27.0),
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 10.0,
+                              )),
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            qty += 1;
+                            print('qty add');
+                            print(qty * double.parse(total.toStringAsFixed(0)));
+                          });
+                        },
+                        icon: Icon(Icons.add_circle),
+                        color: Colors.green,
+                      ),
+                    ],
                   ),
                   Container(
                     height: 30,
@@ -376,7 +419,7 @@ class _VPSalesInputState extends State<VPSalesInput> {
                                         bonusAdded: bonusAddController.text,
                                         discount: discount,
                                         product: chooseProduct,
-                                        qty: qtyController.text,
+                                        qty: qty.toStringAsFixed(0).toString(),
                                         total: total,
                                         tipeBayar: tipeBayar,
                                         visitPlanId: model.idVisitPlan,

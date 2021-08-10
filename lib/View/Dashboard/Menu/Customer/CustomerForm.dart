@@ -29,6 +29,8 @@ class _CustomerFormState extends State<CustomerForm> {
   TextEditingController prospectController = new TextEditingController();
   TextEditingController decisionController = new TextEditingController();
   TextEditingController addressController = new TextEditingController();
+  TextEditingController phoneController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
   TextEditingController provController = new TextEditingController();
   TextEditingController cityController = new TextEditingController();
   String selectKota = "";
@@ -139,46 +141,46 @@ class _CustomerFormState extends State<CustomerForm> {
                                 )),
                           ),
                         ),
-                        // Container(
-                        //   height: 30,
-                        //   margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        //   child: Padding(
-                        //       padding: const EdgeInsets.only(left: 10),
-                        //       child: Text(
-                        //         "Decision Maker ",
-                        //         style: Theme.of(context)
-                        //             .textTheme
-                        //             .headline6
-                        //             .copyWith(
-                        //                 color: Colors.black,
-                        //                 fontWeight: FontWeight.bold),
-                        //       )),
-                        // ),
-                        // Container(
-                        //   height: 50,
-                        //   padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                        //   decoration: BoxDecoration(
-                        //       border: Border.all(),
-                        //       borderRadius: BorderRadius.circular(6)),
-                        //   child: TextFormField(
-                        //     controller: decisionController,
-                        //     validator: (value) {
-                        //       if (value == null || value.isEmpty) {
-                        //         return 'Enter Name';
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: InputDecoration(
-                        //         border: InputBorder.none,
-                        //         // labelText: "Name",
-                        //         labelStyle: TextStyle(fontSize: 14.0),
-                        //         hintStyle: TextStyle(
-                        //           color: Colors.grey,
-                        //           fontSize: 10.0,
-                        //         )),
-                        //     style: TextStyle(fontSize: 14.0),
-                        //   ),
-                        // ),
+                        Container(
+                          height: 30,
+                          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                          child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                "Decision Maker ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                        Container(
+                          height: 50,
+                          padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                          decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(6)),
+                          child: TextFormField(
+                            controller: decisionController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter Name';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                // labelText: "Name",
+                                labelStyle: TextStyle(fontSize: 14.0),
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 10.0,
+                                )),
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                        ),
                         Container(
                           height: 30,
                           margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -219,52 +221,89 @@ class _CustomerFormState extends State<CustomerForm> {
                             style: TextStyle(fontSize: 14.0),
                           ),
                         ),
-                        // Container(
-                        //   height: 30,
-                        //   margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        //   child: Padding(
-                        //       padding: const EdgeInsets.only(left: 10),
-                        //       child: Text(
-                        //         "Tipe",
-                        //         style: Theme.of(context)
-                        //             .textTheme
-                        //             .headline6
-                        //             .copyWith(
-                        //                 color: Colors.black,
-                        //                 fontWeight: FontWeight.bold),
-                        //       )),
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Checkbox(
-                        //       value: tunaiValue,
-                        //       onChanged: (value) {
-                        //         tunaiValue = !tunaiValue;
-                        //         setState(() {});
-                        //       },
-                        //     ),
-                        //     Text('Tunai'),
-                        //     Container(
-                        //       padding: EdgeInsets.fromLTRB(55, 0, 0, 0),
-                        //       child: Checkbox(
-                        //         value: kreditValue,
-                        //         onChanged: (value) {
-                        //           kreditValue = !kreditValue;
-                        //           setState(() {});
-                        //           print(value);
-                        //         },
-                        //       ),
-                        //     ),
-                        //     Text('Kredit')
-                        //   ],
-                        // ),
                         Container(
                           height: 30,
                           margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
                           child: Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
-                                "Salution",
+                                "Phone Number",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                          height: 50,
+                          decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(6)),
+                          child: TextFormField(
+                            controller: phoneController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter Name';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                labelStyle: TextStyle(fontSize: 14.0),
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 10.0,
+                                )),
+                          ),
+                        ),
+                        Container(
+                          height: 30,
+                          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                          child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                "Email",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                          height: 50,
+                          decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(6)),
+                          child: TextFormField(
+                            controller: emailController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter Name';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                labelStyle: TextStyle(fontSize: 14.0),
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 10.0,
+                                )),
+                          ),
+                        ),
+                        Container(
+                          height: 30,
+                          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                          child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                "Gender",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6
@@ -282,7 +321,7 @@ class _CustomerFormState extends State<CustomerForm> {
                                 borderRadius: BorderRadius.circular(5)),
                             child: DropdownButtonFormField<dynamic>(
                               hint: Text(
-                                'Salutation',
+                                'Gender',
                               ),
                               onChanged: (salution) => setState(() {
                                 selectedSalution = salution;
@@ -446,6 +485,8 @@ class _CustomerFormState extends State<CustomerForm> {
                                         kota: selectKota,
                                         provinsi: selectProv,
                                         alamat: addressController.text,
+                                        hp: phoneController.text,
+                                        email: emailController.text,
                                         name: prospectController.text,
                                         sex: selectedSalution)),
                                   );
