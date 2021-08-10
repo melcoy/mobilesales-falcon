@@ -136,7 +136,7 @@ class _VPPendingState extends State<VPPending> {
                                       return DropdownMenuItem(
                                           value: valueItem['id'].toString(),
                                           child:
-                                              Text("- " + valueItem['name']));
+                                              Text("- " + valueItem['name'] +'\n'));
                                     }).toList() ??
                                     [],
                               ),
