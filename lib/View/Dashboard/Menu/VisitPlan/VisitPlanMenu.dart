@@ -220,7 +220,7 @@ class _VisitPlanMenuState extends State<VisitPlanMenu> {
                             ),
                             subtitle: Text(
                               "Status Visit Plan: " +
-                                  "${state.listVisitPlanModel[index].checkin.contains("10") ? "Undone" : "Done | "}" +
+                                  "${state.listVisitPlanModel[index].checkin.contains("10") ? "Undone| " : "Done | "}" +
                                   "Adress: " +
                                   state.listVisitPlanModel[index].venue +
                                   " | " +

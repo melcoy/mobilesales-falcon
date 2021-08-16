@@ -24,7 +24,6 @@ class ListvisitplanblocBloc
     if (connect == false) {
       yield ListvisitplanblocFailure(noInternet);
     } else {
-      print("${timeFormatPlus(0)} 00:00:00 " + "${timeFormatPlus(1)} 23:59:59");
       List<ListVisitPlanModel> listVp;
       listVp = await _visitPlanRepo.fetchListVp(
           "${timeFormatPlus(0)} 00:00:00", "${timeFormatPlus(1)} 23:59:59");

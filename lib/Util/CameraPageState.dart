@@ -8,8 +8,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:salesappmobile/Bloc/VisitPlan/VisitPlanCheckIn/bloc/visitplancheckinbloc_bloc.dart';
 import 'package:salesappmobile/Model/VisitPlan/Dto/CheckInDto.dart';
 import 'package:salesappmobile/Util/CloudinaryUpload.dart';
+import 'package:salesappmobile/Util/CloudinaryUpload.dart';
 import 'package:salesappmobile/View/Dashboard/Menu/VisitPlan/VisitPlanCheckIn/VisitPlanCheckIn.dart';
 
+import 'CloudinaryUpload.dart';
 import 'Util.dart';
 
 class CameraPageState extends StatefulWidget {
@@ -23,8 +25,6 @@ class CameraPageState extends StatefulWidget {
 class _CameraPageStateState extends State<CameraPageState> {
   CameraController controller;
   CheckInDto model;
-
-  CloudinaryUpload _cloudinaryUpload = CloudinaryUpload();
 
   _CameraPageStateState(this.model);
 
