@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:salesappmobile/Model/VisitPlan/VisitPlanAddModel.dart';
 import 'package:salesappmobile/Model/VisitPlan/VisitPlanCheckInModel.dart';
+import 'package:salesappmobile/Util/Connection.dart';
 import 'package:salesappmobile/Util/Util.dart';
 
 class VisitPlanProvider {
@@ -207,4 +208,42 @@ class VisitPlanProvider {
   }
 
   ///////////////////////////////////////////////////////////////////////
+
+  Future<bool> checkout(
+    String long,
+    String lat,
+    String visitPlanId,
+  ) async {
+    String session = await getSession();
+    String id = await getIdUser();
+    final Connection checkConnection = Connection();
+    final queryParameters = {
+      'id': id,
+      'session': session,
+      'visitplan': visitPlanId
+    };
+
+    final uri = Uri.http(
+        host, '/api/ver1/salesman/visitplan/checkout', queryParameters);
+    Map credential = {'latitude': long, 'longitude': lat};
+    var body = json.encode(credential);
+    try {
+      bool connect = await checkConnection.initConnectivity();
+
+      if (connect) {
+        http.Response response =
+            await http.post(uri, headers: {"apikey": apikey}, body: body);
+        var decode = json.decode(response.body);
+        if (response.statusCode == 200 && decode['status'].toString() == "1") {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
 }

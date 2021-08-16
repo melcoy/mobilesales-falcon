@@ -31,8 +31,6 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
 
   @override
   Widget build(BuildContext context) {
-    print('time');
-    print(time.format(context));
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -95,7 +93,7 @@ class _VisitPlanAddState extends State<VisitPlanAdd> {
                           // onTap: _pickTime,
                         ),
                         ListTile(
-                          title: Text("Time : ${time.format(context)}"),
+                          title: Text("Time : ${time.hour}:${time.minute}"),
                           trailing: Icon(Icons.keyboard_arrow_down),
                           onTap: _pickTime,
                         ),

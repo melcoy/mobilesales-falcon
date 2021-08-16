@@ -27,4 +27,6 @@ class VisitPlanRepo {
   Future<bool> fetchMarkPendingReason(
           String status, String visitPlanId, String pendingNote) =>
       _visitPlanProvider.markPendingReason(status, visitPlanId, pendingNote);
+  Future<bool> fetchCheckout(String lat, String long, String visitPlanId) =>
+      _visitPlanProvider.checkout(long, lat, visitPlanId);
 }
